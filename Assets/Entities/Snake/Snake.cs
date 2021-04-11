@@ -10,11 +10,11 @@ public class Snake : Entity
 
     private ISnakeInput _snakeInput;
     private SnakeMover _snakeMover;
+    private SnakeEater _snakeEater;
 
     private Coroutine _tickCoroutine;
 
     private List<Entity> _tail = new List<Entity>();
-    private List<GridCellCoordinates> _growPositions = new List<GridCellCoordinates>();
     
 
     private void Awake()
@@ -23,12 +23,9 @@ public class Snake : Entity
         
         _tail.Add(this);
         _snakeMover = new SnakeMover(_snakeInput, _tail, _snakeSettings);
+        _snakeEater = new SnakeEater(_tail, _snakeSettings);
 
         _tickCoroutine = StartCoroutine(TickCoroutine());
-    }
-
-    private void Start()
-    {
     }
 
     IEnumerator TickCoroutine()
@@ -40,43 +37,16 @@ public class Snake : Entity
             if(currentGridCell == null)
                 currentGridCell = GridGenerator.instance.GetGridCellByCoordinate(_snakeSettings.StartX, _snakeSettings.StartY);
 
-            GridCell gridCellToGrow = GetFoodGridCellInTheLastTailPosition();
+            GridCell gridCellToGrow = _snakeEater.GetFoodGridCellInTheLastTailPosition();
 
             _snakeMover.Tick();
 
             if (gridCellToGrow != null)
-                Grow(gridCellToGrow);
+                Grow(gridCellToGrow, _snakeSettings.TailPrefab);
 
         }
     }
 
-    private GridCell GetFoodGridCellInTheLastTailPosition()
-    {
-        Entity lastSnakeTail = _tail[_tail.Count - 1];
-
-        foreach (GridCellCoordinates growPositions in _growPositions)
-        {
-           if(  lastSnakeTail.currentGridCell.coordinate.x == growPositions.x &&
-                lastSnakeTail.currentGridCell.coordinate.y == growPositions.y   )
-            {
-                return lastSnakeTail.currentGridCell;
-            }
-        }
-        return null;
-    }
-
-    private void Grow(GridCell newTailGridCell)
-    {
-        Debug.Log("Grow");
-        GameObject newTailGO = Instantiate(_snakeSettings.TailPrefab, null);
-        SnakeTail newTail = newTailGO.GetComponent<SnakeTail>();
-        newTail.currentGridCell = newTailGridCell;
-        newTail.Prox = _tail[_tail.Count - 1];
-        _tail.Add(newTail);
-        _growPositions.Remove(newTailGridCell.coordinate);
-
-
-    }
 
     private void Update()
     {
@@ -88,10 +58,24 @@ public class Snake : Entity
         throw new NotImplementedException();
     }
 
-    internal void Feed(GridCell feedCell)
+    public void Feed(GridCell currentGridCell)
     {
-        _growPositions.Add(feedCell.coordinate);
+        _snakeEater.AddGrowCoordinate(currentGridCell.coordinate);
     }
 
-    
+    public void Grow(GridCell newTailGridCell, GameObject tailPrefab)
+    {
+        GameObject newTailGO = Instantiate(tailPrefab, null);
+        SnakeTail newTail = newTailGO.GetComponent<SnakeTail>();
+
+        newTail.currentGridCell = newTailGridCell;
+        newTail.Prox = _tail[_tail.Count - 1];
+
+        _tail.Add(newTail);
+        _snakeEater.RemoveGrowCoordinate(newTailGridCell.coordinate);
+        
+    }
+
+
+
 }

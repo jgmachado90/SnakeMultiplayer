@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd37bc850870d0342827d6de33bff762, type: 3}
   m_Name: Grid1
   m_EditorClassIdentifier: 
-  _lengthX: 30
-  _lengthY: 15
+  _lengthX: 20
+  _lengthY: 20
   _gridPrefab: {fileID: 6959597250167055965, guid: 61236cd0b1b0d1b448f4cb079d73e7fb, type: 3}

@@ -43,7 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b78163f61a6364e9567618e49e8148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lengthX: 10
-  lengthY: 10
-  gridCells: []
-  gridCellPrefab: {fileID: 6063625268498407624, guid: 61236cd0b1b0d1b448f4cb079d73e7fb, type: 3}
+  _gridSettings: {fileID: 11400000, guid: fb2d2b74f42ac4641b45a8378f730510, type: 2}
+  food: {fileID: 9158487608503621276, guid: 0cc51c6ecdf0b914482f90ed09fead15, type: 3}

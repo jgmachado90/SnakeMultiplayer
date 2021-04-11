@@ -8,14 +8,12 @@ public class SnakeMover
     private readonly ISnakeInput _snakeInput;
     private readonly List<Entity> _snakeTail;
     private readonly Entity _snakeHead;
-    private readonly SnakeSettings _snakeSettings;
 
     public SnakeMover(ISnakeInput snakeInput, List<Entity> tail, SnakeSettings snakeSettings)
     {
         _snakeInput = snakeInput;
         _snakeTail = tail;
         _snakeHead = _snakeTail[0];
-        _snakeSettings = snakeSettings;
     }
 
     public void Tick()
