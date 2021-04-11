@@ -11,7 +11,8 @@ public class GridGenerator : MonoBehaviour
 
     private List<GridCell> _gridCells = new List<GridCell>();
 
-    public GameObject food;
+    private List<GridCell> _emptyCells = new List<GridCell>();
+
 
     private void Awake()
     {
@@ -21,8 +22,21 @@ public class GridGenerator : MonoBehaviour
     private void Start()
     {
         GenerateScenery();
+        foreach(GridCell gridCells in _gridCells)
+        {
+            gridCells.OnAddEntity += RemoveCellFromEmptyList;
+            gridCells.OnRemoveEntity += AddCellInEmptyList;
+        }
+    }
 
-        instantiateNewFood();
+    private void AddCellInEmptyList(GridCell gridCell)
+    {
+        _emptyCells.Add(gridCell);
+    }
+
+    private void RemoveCellFromEmptyList(GridCell gridCell)
+    {
+        _emptyCells.Remove(gridCell);
     }
 
     private void GenerateScenery()
@@ -37,29 +51,26 @@ public class GridGenerator : MonoBehaviour
                 gridCell.coordinate.x = i;
                 gridCell.coordinate.y = j;
                 _gridCells.Add(gridCell);
+                _emptyCells.Add(gridCell);
             }
         }
     }
 
-    public void instantiateNewFood()
-    {
-        GameObject foodGO = Instantiate(food);
-        Food newfood = foodGO.GetComponent<Food>();
-        newfood.currentGridCell = _gridCells[25];
-
-        GameObject foodGO2 = Instantiate(food);
-        Food newfood2 = foodGO2.GetComponent<Food>();
-        newfood2.currentGridCell = _gridCells[36];
-
-        GameObject foodGO3 = Instantiate(food);
-        Food newfood3 = foodGO3.GetComponent<Food>();
-        newfood3.currentGridCell = _gridCells[18];
-
-    }
+  
 
     public GridCell GetGridCellByCoordinate(int x, int y)
     {
         return _gridCells[(_gridSettings.LengthX * y) + x];
+    }
+
+    public GridCell GetRandomEmptyGridCell()
+    {
+        int emptyCellsCount = _emptyCells.Count;
+
+        int indexRNG = UnityEngine.Random.Range(0, emptyCellsCount);
+
+
+        return _emptyCells[indexRNG];
     }
 
 
