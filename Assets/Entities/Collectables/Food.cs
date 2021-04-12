@@ -12,6 +12,7 @@ public class Food : Entity, ICollectable
     public void Collect(Entity collector)
     {
         collector.GetComponent<Snake>().Feed(currentGridCell);
+        FoodGenerator.instance.InstantiateNewFood();
         Destroy(this.gameObject);
     }
 }

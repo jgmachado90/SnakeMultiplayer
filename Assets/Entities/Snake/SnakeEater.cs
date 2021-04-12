@@ -32,6 +32,31 @@ public class SnakeEater
         return null;
     }
 
+    public void ScaleTailsWithFood()
+    {
+        if (_growPositions.Count == 0)
+        {
+            foreach (Entity tail in _snakeTail)
+            {
+                tail.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            }
+            return;
+        }
+
+        foreach(Entity tail in _snakeTail)
+        {
+            foreach(GridCellCoordinates foodCoord in _growPositions)
+            {
+                if(tail.currentGridCell.coordinate.x == foodCoord.x &&
+                    tail.currentGridCell.coordinate.y == foodCoord.y)
+                    tail.transform.localScale = new Vector3(1f, 1f, 1f);
+                else
+                    tail.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                
+            }
+        }
+    }
+
 
     public void AddGrowCoordinate(GridCellCoordinates coordinates)
     {

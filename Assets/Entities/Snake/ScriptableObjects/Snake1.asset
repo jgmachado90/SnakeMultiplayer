@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3f14d80125ba445b4dcf2d61a07828, type: 3}
   m_Name: Snake1
   m_EditorClassIdentifier: 
-  _movementsPerSecond: 0.2
+  _movementsPerSecond: 0.1
   _startX: 0
   _startY: 0
   _tailPrefab: {fileID: 2509476383913175623, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}

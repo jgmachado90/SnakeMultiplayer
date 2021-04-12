@@ -13,6 +13,8 @@ public class GridGenerator : MonoBehaviour
 
     private List<GridCell> _emptyCells = new List<GridCell>();
 
+    public Action OnCreateGrid;
+
 
     private void Awake()
     {
@@ -27,6 +29,7 @@ public class GridGenerator : MonoBehaviour
             gridCells.OnAddEntity += RemoveCellFromEmptyList;
             gridCells.OnRemoveEntity += AddCellInEmptyList;
         }
+        OnCreateGrid?.Invoke();
     }
 
     private void AddCellInEmptyList(GridCell gridCell)

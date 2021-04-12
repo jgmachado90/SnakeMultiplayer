@@ -15,6 +15,7 @@ public class Snake : Entity
     private Coroutine _tickCoroutine;
 
     private List<Entity> _tail = new List<Entity>();
+
     
 
     private void Awake()
@@ -40,6 +41,8 @@ public class Snake : Entity
             GridCell gridCellToGrow = _snakeEater.GetFoodGridCellInTheLastTailPosition();
 
             _snakeMover.Tick();
+
+            _snakeEater.ScaleTailsWithFood();
 
             if (gridCellToGrow != null)
                 Grow(gridCellToGrow, _snakeSettings.TailPrefab);

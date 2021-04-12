@@ -9,6 +9,8 @@ public class SnakeMover
     private readonly List<Entity> _snakeTail;
     private readonly Entity _snakeHead;
 
+    private Direction lookingDirection;
+
     public SnakeMover(ISnakeInput snakeInput, List<Entity> tail, SnakeSettings snakeSettings)
     {
         _snakeInput = snakeInput;
@@ -27,26 +29,32 @@ public class SnakeMover
         int newX = _snakeHead.currentGridCell.coordinate.x;
         int newY = _snakeHead.currentGridCell.coordinate.y;
 
-        if (_snakeInput.Direction == Direction.Up)
+        if (_snakeInput.Direction == Direction.Up && lookingDirection != Direction.Down)
         {
             newY++;
+            lookingDirection = Direction.Up;
             _snakeHead.transform.localRotation = Quaternion.Euler(0, 0, 90);
         }
-        else if (_snakeInput.Direction == Direction.Down)
+        else if (_snakeInput.Direction == Direction.Down && lookingDirection != Direction.Up)
         {
             newY--;
+            lookingDirection = Direction.Down;
             _snakeHead.transform.localRotation = Quaternion.Euler(0, 0, -90);
         }
-        else if (_snakeInput.Direction == Direction.Left)
+        else if (_snakeInput.Direction == Direction.Left && lookingDirection != Direction.Right)
         {
             newX--;
+            lookingDirection = Direction.Left;
             _snakeHead.transform.localRotation = Quaternion.Euler(0, 0, 180);
         }
-        else if (_snakeInput.Direction == Direction.Right)
+        else if (_snakeInput.Direction == Direction.Right && lookingDirection != Direction.Left)
         {
+            lookingDirection = Direction.Right;
             newX++;
             _snakeHead.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
+        
+   
 
         //Transform headBeforeMovement = _head;
         //SetPosition(newX, newY);
