@@ -97,3 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _typeOfEntity: 0
   _snakeSettings: {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
+  _gridInfo: {fileID: 11400000, guid: 8838147c7d4a90344ab52c49d717a7bd, type: 2}

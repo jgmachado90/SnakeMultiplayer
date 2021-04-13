@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 770218888753835589}
   - component: {fileID: 770218888753835590}
+  - component: {fileID: 1782761021}
+  - component: {fileID: 9189838092653754246}
   m_Layer: 0
   m_Name: FoodGenerator
   m_TagString: Untagged
@@ -43,4 +45,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81edfaa8bcfeae243af555b4968c8283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gridInfo: {fileID: 11400000, guid: 8838147c7d4a90344ab52c49d717a7bd, type: 2}
   _foodSettings: {fileID: 11400000, guid: 9e7f261ea3b40f74aa038b58c7e94efd, type: 2}
+--- !u!114 &1782761021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770218888753835591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 631266a263b0c674cbfc250cba7deec2, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 770218888753835590}
+        m_TargetAssemblyTypeName: FoodGenerator, Assembly-CSharp
+        m_MethodName: InstantiateFirstFood
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9189838092653754246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770218888753835591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: cbbcebb942c98e541964205dd4489348, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 770218888753835590}
+        m_TargetAssemblyTypeName: FoodGenerator, Assembly-CSharp
+        m_MethodName: InstantiateNewFood
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

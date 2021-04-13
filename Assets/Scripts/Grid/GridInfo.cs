@@ -1,0 +1,38 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "Grid/Info", fileName = "GridInfo")]
+public class GridInfo : ScriptableObject
+{
+    [SerializeField] private GridSettings _gridSettings;
+
+    public List<GridCell> _gridCells = new List<GridCell>();
+    public List<GridCell> _emptyCells = new List<GridCell>();
+
+    public void AddCellInEmptyList(GridCell gridCell)
+    {
+        _emptyCells.Add(gridCell);
+    }
+
+    public void RemoveCellFromEmptyList(GridCell gridCell)
+    {
+        _emptyCells.Remove(gridCell);
+    }
+
+    public GridCell GetGridCellByCoordinate(int x, int y)
+    {
+        return _gridCells[(_gridSettings.LengthX.Value * y) + x];
+    }
+
+    public GridCell GetRandomEmptyGridCell()
+    {
+        int emptyCellsCount = _emptyCells.Count;
+
+        int indexRNG = UnityEngine.Random.Range(0, emptyCellsCount);
+
+
+        return _emptyCells[indexRNG];
+    }
+
+}

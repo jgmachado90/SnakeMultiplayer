@@ -97,3 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ocupated: 0
   entityOcupating: {fileID: 0}
+  _gridInfo: {fileID: 11400000, guid: 8838147c7d4a90344ab52c49d717a7bd, type: 2}

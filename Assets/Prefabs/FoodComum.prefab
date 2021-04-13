@@ -96,3 +96,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _typeOfEntity: 3
+  OnCollectFood: {fileID: 11400000, guid: cbbcebb942c98e541964205dd4489348, type: 2}

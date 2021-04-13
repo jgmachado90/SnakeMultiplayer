@@ -399,6 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _typeOfEntity: 1
   _snakeSettings: {fileID: 11400000, guid: 1e9e8b4188d93db4f9fa1dbfa3bc0a1f, type: 2}
+  _gridInfo: {fileID: 0}
 --- !u!1 &6515560844163063868
 GameObject:
   m_ObjectHideFlags: 0
