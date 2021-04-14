@@ -22,6 +22,17 @@ public class GridInfo : ScriptableObject
 
     public GridCell GetGridCellByCoordinate(int x, int y)
     {
+        if (x == _gridSettings.LengthX.Value)
+            x = x - _gridSettings.LengthX.Value;
+        else if (x == -1)
+            x = _gridSettings.LengthX.Value-1;
+
+        if(y == _gridSettings.LengthY.Value)
+            y = y - _gridSettings.LengthY.Value;
+
+        else if (y == -1)
+            y = _gridSettings.LengthY.Value - 1;
+
         return _gridCells[(_gridSettings.LengthX.Value * y) + x];
     }
 

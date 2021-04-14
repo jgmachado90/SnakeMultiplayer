@@ -97,6 +97,6 @@ public class SnakeMover
     private void SetPosition(Entity entity, int x, int y)
     {
         entity.currentGridCell = _gridInfo.GetGridCellByCoordinate(x, y);
-        entity.transform.position = new Vector3(x, y, 0);
+        entity.transform.position = new Vector3(entity.currentGridCell.coordinate.x, entity.currentGridCell.coordinate.y, 0);
     }
 }
