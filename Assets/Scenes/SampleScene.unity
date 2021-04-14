@@ -399,7 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _typeOfEntity: 1
   _snakeSettings: {fileID: 11400000, guid: 1e9e8b4188d93db4f9fa1dbfa3bc0a1f, type: 2}
-  _gridInfo: {fileID: 0}
+  _gridInfo: {fileID: 11400000, guid: 8838147c7d4a90344ab52c49d717a7bd, type: 2}
 --- !u!1 &6515560844163063868
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,6 +428,10 @@ PrefabInstance:
     - target: {fileID: 8888160117902802162, guid: f5e02dc969993134f9b1496d45259b64, type: 3}
       propertyPath: m_Name
       value: SnakeHead
+      objectReference: {fileID: 0}
+    - target: {fileID: 8888160117902802162, guid: f5e02dc969993134f9b1496d45259b64, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8888160117902802166, guid: f5e02dc969993134f9b1496d45259b64, type: 3}
       propertyPath: m_RootOrder

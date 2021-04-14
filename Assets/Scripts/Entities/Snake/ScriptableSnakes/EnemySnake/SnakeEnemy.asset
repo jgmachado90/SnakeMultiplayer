@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3f14d80125ba445b4dcf2d61a07828, type: 3}
+  m_Name: SnakeEnemy
+  m_EditorClassIdentifier: 
+  _movementsPerSecond: {fileID: 11400000, guid: 576dff6f2d3a3ba458301915df3de68b, type: 2}
+  _startX: {fileID: 11400000, guid: d754c61468ceb6c41859c9c838a912d8, type: 2}
+  _startY: {fileID: 11400000, guid: c32712eeea601fa4e9b664a22bcb1da7, type: 2}
+  _startScale: {fileID: 11400000, guid: ddd85953cc0fd7f48a03693fb09eb1f2, type: 2}
+  _feedScale: {fileID: 11400000, guid: d48736346ac2d9e468748948c279faf6, type: 2}
+  _tailPrefab: {fileID: 2509476383913175623, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
+  _isAI: 1
