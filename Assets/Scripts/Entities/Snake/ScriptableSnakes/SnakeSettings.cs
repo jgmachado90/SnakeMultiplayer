@@ -25,8 +25,6 @@ public class SnakeSettings : ScriptableObject
     public FloatVariable StartScale { get { return _startScale; } }
     public FloatVariable FeedScale { get { return _feedScale; } }
     public FloatVariable SlowFoodPercent { get { return _slowFoodPercent; } }
-
-    public FloatVariable MinimumMovementsPerSecond { get { return _minimumMovementsPerSecond; } }
     public GameObject TailPrefab { get { return _tailPrefab; } }
     public bool IsAI { get { return _isAI; } }
 }
