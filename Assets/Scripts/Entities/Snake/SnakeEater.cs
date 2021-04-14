@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,11 @@ public class SnakeEater
             }
         }
         return null;
+    }
+
+    public float GetSlowedMovementsPerSecond()
+    {
+        return _snakeSettings.SlowFoodPercent.Value * _growPositions.Count;
     }
 
     public void ScaleTailsWithFood()

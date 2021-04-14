@@ -20,7 +20,7 @@ public class Snake : Entity
 
     private List<Entity> _tail = new List<Entity>();
 
-    
+
 
     private void Awake()
     {
@@ -37,7 +37,10 @@ public class Snake : Entity
     {
         while (true)
         {
-            yield return new WaitForSeconds(_snakeSettings.MovementsPerSecond.Value);
+            float slowedMovementsPerSecond = _snakeEater.GetSlowedMovementsPerSecond();
+
+            Debug.Log("slowed = " + slowedMovementsPerSecond);
+            yield return new WaitForSeconds(_snakeSettings.MovementsPerSecond.Value + slowedMovementsPerSecond);
 
             if(currentGridCell == null)
                 currentGridCell = _gridInfo.GetGridCellByCoordinate(_snakeSettings.StartX.Value, _snakeSettings.StartY.Value);

@@ -9,8 +9,12 @@ public class SnakeSettings : ScriptableObject
     [SerializeField] private IntVariable _startX;
     [SerializeField] private IntVariable _startY;
 
+
     [SerializeField] private FloatVariable _startScale;
     [SerializeField] private FloatVariable _feedScale;
+
+    [SerializeField] private FloatVariable _slowFoodPercent;
+    [SerializeField] private FloatVariable _minimumMovementsPerSecond;
 
     [SerializeField] private GameObject _tailPrefab;
     [SerializeField] private bool _isAI;
@@ -20,6 +24,9 @@ public class SnakeSettings : ScriptableObject
     public IntVariable StartY { get { return _startY; } }
     public FloatVariable StartScale { get { return _startScale; } }
     public FloatVariable FeedScale { get { return _feedScale; } }
+    public FloatVariable SlowFoodPercent { get { return _slowFoodPercent; } }
+
+    public FloatVariable MinimumMovementsPerSecond { get { return _minimumMovementsPerSecond; } }
     public GameObject TailPrefab { get { return _tailPrefab; } }
     public bool IsAI { get { return _isAI; } }
 }

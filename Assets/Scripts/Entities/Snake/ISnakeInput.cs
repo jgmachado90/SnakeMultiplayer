@@ -5,9 +5,9 @@ using UnityEngine;
 public enum Direction 
 { 
     Right,
+    Down,
     Left,
-    Up,
-    Down
+    Up
 }
 public interface ISnakeInput {
     void ReadInput();
