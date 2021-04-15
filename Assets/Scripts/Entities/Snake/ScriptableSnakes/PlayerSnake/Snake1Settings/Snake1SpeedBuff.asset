@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a6a40595e043154ebf3491b7d8247fc, type: 3}
-  m_Name: Snake1MovementsPerSecond
+  m_Name: Snake1SpeedBuff
   m_EditorClassIdentifier: 
-  Value: 0.2
+  Value: 0

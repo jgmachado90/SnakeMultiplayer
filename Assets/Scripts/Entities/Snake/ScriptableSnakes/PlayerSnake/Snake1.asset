@@ -15,9 +15,10 @@ MonoBehaviour:
   _movementsPerSecond: {fileID: 11400000, guid: 7f005ac2be811c74e8b5974d7485abcb, type: 2}
   _startX: {fileID: 11400000, guid: 99379c9ef26da444596375431da73b14, type: 2}
   _startY: {fileID: 11400000, guid: f76152ebfb5fe724ebd946bd4c81993a, type: 2}
+  _speedDebuff: {fileID: 11400000, guid: 09fc0d72008ec234782484a29876499d, type: 2}
+  _speedBuff: {fileID: 11400000, guid: e4b4822062a8e564f80c08a7a8433a65, type: 2}
+  _snakeMaxSpeed: {fileID: 11400000, guid: 2d54af2769c059c48982adce295ddc69, type: 2}
   _startScale: {fileID: 11400000, guid: ddd85953cc0fd7f48a03693fb09eb1f2, type: 2}
   _feedScale: {fileID: 11400000, guid: d48736346ac2d9e468748948c279faf6, type: 2}
-  _slowFoodPercent: {fileID: 11400000, guid: 09fc0d72008ec234782484a29876499d, type: 2}
-  _minimumMovementsPerSecond: {fileID: 0}
   _tailPrefab: {fileID: 2509476383913175623, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
   _isAI: 0

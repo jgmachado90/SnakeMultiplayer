@@ -257,6 +257,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 770218888753835590, guid: 37a1991587f51b342a960710cbaabfd8, type: 3}
+      propertyPath: _collectableSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e7f261ea3b40f74aa038b58c7e94efd, type: 2}
     - target: {fileID: 770218888753835591, guid: 37a1991587f51b342a960710cbaabfd8, type: 3}
       propertyPath: m_Name
       value: FoodGenerator
@@ -479,3 +483,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5e02dc969993134f9b1496d45259b64, type: 3}
+--- !u!1 &8888160117804694882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8888160117902802162, guid: f5e02dc969993134f9b1496d45259b64, type: 3}
+  m_PrefabInstance: {fileID: 8888160117804694881}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8888160117804694883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8888160117804694882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9bf09f62231df04fad48bd9738b9f9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snakeSettings: {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
+  _snakeBuff: {fileID: 11400000, guid: 239963a259615e546a1f80353ba3d1f8, type: 2}
+--- !u!114 &8888160117804694884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8888160117804694882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 5c7517cff9d5a504f8041894a2e45613, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8888160117804694883}
+        m_TargetAssemblyTypeName: EnginePowerUpController, Assembly-CSharp
+        m_MethodName: ActivateEnginePowerUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -33,9 +33,12 @@ public class SnakeEater
         return null;
     }
 
-    public float GetSlowedMovementsPerSecond()
+    public float GetSnakeCurrentSpeed()
     {
-        return _snakeSettings.SlowFoodPercent.Value * _growPositions.Count;
+        float speedDebuff = _snakeSettings.SpeedDebuff.Value * _growPositions.Count;
+        float speedBuff = _snakeSettings.SpeedBuff.Value;
+        float finalSpeed = _snakeSettings.MovementsPerSecond.Value + speedDebuff - speedBuff;
+        return finalSpeed > 0 ? finalSpeed : _snakeSettings.SnakeMaxSpeed.Value;
     }
 
     public void ScaleTailsWithFood()

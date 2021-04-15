@@ -37,10 +37,8 @@ public class Snake : Entity
     {
         while (true)
         {
-            float slowedMovementsPerSecond = _snakeEater.GetSlowedMovementsPerSecond();
-
-            Debug.Log("slowed = " + slowedMovementsPerSecond);
-            yield return new WaitForSeconds(_snakeSettings.MovementsPerSecond.Value + slowedMovementsPerSecond);
+            float snakeMovementsPerSec = _snakeEater.GetSnakeCurrentSpeed();
+            yield return new WaitForSeconds(snakeMovementsPerSec);
 
             if(currentGridCell == null)
                 currentGridCell = _gridInfo.GetGridCellByCoordinate(_snakeSettings.StartX.Value, _snakeSettings.StartY.Value);

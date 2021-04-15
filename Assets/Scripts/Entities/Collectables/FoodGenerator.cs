@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,12 +9,26 @@ public class FoodGenerator : MonoBehaviour
     [SerializeField] private GridInfo _gridInfo;
 
     [Header("Food")]
-    [SerializeField] private FoodSettings _foodSettings;
+    [SerializeField] private CollectableSettings _collectableSettings;
 
     public void InstantiateNewFood()
     {
-        GameObject foodGO = Instantiate(_foodSettings.FoodPrefab);
-        Food newfood = foodGO.GetComponent<Food>();
+        if(UnityEngine.Random.Range(0,2) < 1)
+        {
+            InstantiateFood(_collectableSettings.FoodPrefab);
+        }
+        else
+        {
+            InstantiateFood(_collectableSettings.EnginePowerPrefab);
+        }
+
+        
+    }
+
+    private void InstantiateFood(GameObject collectable)
+    {
+        GameObject foodGO = Instantiate(collectable);
+        Entity newfood = foodGO.GetComponent<Entity>();
         newfood.currentGridCell = _gridInfo.GetRandomEmptyGridCell();
     }
 
