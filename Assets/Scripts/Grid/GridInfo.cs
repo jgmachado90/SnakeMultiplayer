@@ -52,4 +52,26 @@ public class GridInfo : ScriptableObject
         return _emptyCells[indexRNG];
     }
 
+    public List<Entity> GetEntities()
+    {
+        List<Entity> entities = new List<Entity>();
+
+        foreach(GridCell gridCell in _gridCells)
+        {
+            if (gridCell.ocupated)
+            {
+                entities.Add(gridCell.entityOcupating);        
+            }
+        }
+        return entities;
+    }
+
+    public void ClearGrid()
+    {
+        foreach(Entity entity in GetEntities())
+        {
+            Destroy(entity.gameObject);
+        }
+    }
+
 }

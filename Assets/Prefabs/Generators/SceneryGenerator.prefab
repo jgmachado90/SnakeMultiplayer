@@ -45,4 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridSettings: {fileID: 11400000, guid: fb2d2b74f42ac4641b45a8378f730510, type: 2}
   _gridInfo: {fileID: 11400000, guid: 8838147c7d4a90344ab52c49d717a7bd, type: 2}
+  _gridInstance: {fileID: 11400000, guid: 761ea322db25c5d43b5df1c7de08a928, type: 2}
+  foodPrefab: {fileID: 9158487608503621276, guid: 0cc51c6ecdf0b914482f90ed09fead15, type: 3}
+  enginePowerPrefab: {fileID: 9158487608503621276, guid: fd267640c3bcc154db0ce04460ec0bc1, type: 3}
+  PlayerPrefab: {fileID: 0}
+  PlayerTail: {fileID: 0}
   OnCreateGrid: {fileID: 11400000, guid: 631266a263b0c674cbfc250cba7deec2, type: 2}

@@ -7,7 +7,8 @@ public class ControllerInput : ISnakeInput
     //TODO CHANGE ALL THIS TRASH
     public void ReadInput()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+
+            if (Input.GetKeyDown(KeyCode.A))
         {
             int nextDirectionIndex = (int) Direction;
             if (nextDirectionIndex - 1 < 0)

@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 4ca1b8cf360e22448bdb1710cc9a56d4, type: 3}
   m_Color: {r: 0.9827944, g: 1, b: 0, a: 1}
   m_FlipX: 0
@@ -96,4 +96,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _typeOfEntity: 3
+  _entityInfo: {fileID: 11400000, guid: fc4ae3778bd09ed42a680e4aac7cab94, type: 2}
   OnCollectFood: {fileID: 11400000, guid: cbbcebb942c98e541964205dd4489348, type: 2}

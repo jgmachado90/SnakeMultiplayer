@@ -6,76 +6,63 @@ using UnityEngine;
 public class SnakeMover
 {
     private readonly ISnakeInput _snakeInput;
-    private readonly List<Entity> _snakeTail;
-    private readonly Entity _snakeHead;
+    private readonly List<Entity> _snakePart;
     private readonly GridInfo _gridInfo;
+    private readonly SnakeSettings _snakeSettings;
 
     private Direction lookingDirection;
 
-    public SnakeMover(ISnakeInput snakeInput, List<Entity> tail, SnakeSettings snakeSettings, GridInfo gridInfo)
+    public SnakeMover(ISnakeInput snakeInput, List<Entity> snakePart, SnakeSettings snakeSettings, GridInfo gridInfo)
     {
         _snakeInput = snakeInput;
-        _snakeTail = tail;
-        _snakeHead = _snakeTail[0];
+        _snakePart = snakePart;
         _gridInfo = gridInfo;
+        _snakeSettings = snakeSettings;
     }
 
     public void Tick()
     {
-        if (_snakeHead.currentGridCell == null) return;
+        if (_snakeSettings.CurrentHead.currentGridCell == null) return;
         ApplyMovement();
     }
 
     private void ApplyMovement()
     {
-        int newX = _snakeHead.currentGridCell.coordinate.x;
-        int newY = _snakeHead.currentGridCell.coordinate.y;
+        int newX = _snakeSettings.CurrentHead.currentGridCell.coordinate.x;
+        int newY = _snakeSettings.CurrentHead.currentGridCell.coordinate.y;
 
         if (_snakeInput.Direction == Direction.Up && lookingDirection != Direction.Down)
         {
             newY++;
             lookingDirection = Direction.Up;
-            _snakeHead.transform.localRotation = Quaternion.Euler(0, 0, 90);
+            _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 90);
         }
         else if (_snakeInput.Direction == Direction.Down && lookingDirection != Direction.Up)
         {
             newY--;
             lookingDirection = Direction.Down;
-            _snakeHead.transform.localRotation = Quaternion.Euler(0, 0, -90);
+            _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, -90);
         }
         else if (_snakeInput.Direction == Direction.Left && lookingDirection != Direction.Right)
         {
             newX--;
             lookingDirection = Direction.Left;
-            _snakeHead.transform.localRotation = Quaternion.Euler(0, 0, 180);
+            _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 180);
         }
         else if (_snakeInput.Direction == Direction.Right && lookingDirection != Direction.Left)
         {
             lookingDirection = Direction.Right;
             newX++;
-            _snakeHead.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
-        MoveSnakeTail();
         MoveSnakeHead(newX, newY);
-
     }
 
     private void MoveSnakeHead(int newX, int newY)
     {
         CheckNextCellEntities(newX, newY);
-        SetPosition(_snakeHead, newX, newY);
-    }
-
-    private void MoveSnakeTail()
-    {
-        for (int i = _snakeTail.Count - 1; i > 0; i--)
-        {
-            int x = _snakeTail[i - 1].currentGridCell.coordinate.x;
-            int y = _snakeTail[i - 1].currentGridCell.coordinate.y;
-
-            SetPosition(_snakeTail[i], x, y);
-        }
+        SetPosition(_snakeSettings.CurrentHead, newX, newY);
     }
 
     private void CheckNextCellEntities(int x, int y)
@@ -86,17 +73,23 @@ public class SnakeMover
 
         if (nextCell.entityOcupating is ICollectable)
         {
-            nextCell.entityOcupating.GetComponent<ICollectable>().Collect(_snakeHead);
+            nextCell.entityOcupating.GetComponent<ICollectable>().Collect(_snakeSettings.CurrentHead.Prox);
         }
         else if (nextCell.entityOcupating.typeOfEntity == Entity.TypeOfEntity.Player)
         {
-            _snakeHead.GetComponent<Snake>().Die();
+            _snakeSettings.CurrentHead.GetComponentInParent<Snake>().Die();
         }
     }
 
     private void SetPosition(Entity entity, int x, int y)
     {
-        entity.currentGridCell = _gridInfo.GetGridCellByCoordinate(x, y);
-        entity.transform.position = new Vector3(entity.currentGridCell.coordinate.x, entity.currentGridCell.coordinate.y, 0);
+        SnakePart lastPart = (SnakePart)_snakeSettings.CurrentHead.Prox;
+
+        lastPart.currentGridCell = _gridInfo.GetGridCellByCoordinate(x, y);
+        lastPart.transform.position = new Vector3(lastPart.currentGridCell.coordinate.x, lastPart.currentGridCell.coordinate.y, 0);
+
+        _snakeSettings.CurrentHead.isHead = false;
+        _snakeSettings.CurrentHead = lastPart;
+        lastPart.isHead = true;
     }
 }

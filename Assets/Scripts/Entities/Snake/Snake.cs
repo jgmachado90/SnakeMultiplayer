@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Snake : Entity
+public class Snake : MonoBehaviour
 {
     [Header("Snake")]
     [SerializeField] private SnakeSettings _snakeSettings;
@@ -18,17 +18,24 @@ public class Snake : Entity
 
     private Coroutine _tickCoroutine;
 
-    private List<Entity> _tail = new List<Entity>();
+    public SnakePart _startingHead;
+
+
+    private List<Entity> snakeParts = new List<Entity>();
 
 
 
     private void Awake()
     {
         _snakeInput = _snakeSettings.IsAI ? new AiInput() as ISnakeInput : new ControllerInput();
-        
-        _tail.Add(this);
-        _snakeMover = new SnakeMover(_snakeInput, _tail, _snakeSettings, _gridInfo);
-        _snakeEater = new SnakeEater(_tail, _snakeSettings);
+
+        _startingHead.Prox = _startingHead;
+        _snakeSettings.CurrentHead = _startingHead;
+    
+        snakeParts.Add(_startingHead);
+
+        _snakeMover = new SnakeMover(_snakeInput, snakeParts, _snakeSettings, _gridInfo);
+        _snakeEater = new SnakeEater(snakeParts, _snakeSettings);
 
         _tickCoroutine = StartCoroutine(TickCoroutine());
     }
@@ -40,21 +47,19 @@ public class Snake : Entity
             float snakeMovementsPerSec = _snakeEater.GetSnakeCurrentSpeed();
             yield return new WaitForSeconds(snakeMovementsPerSec);
 
-            if(currentGridCell == null)
-                currentGridCell = _gridInfo.GetGridCellByCoordinate(_snakeSettings.StartX.Value, _snakeSettings.StartY.Value);
-
-            GridCell gridCellToGrow = _snakeEater.GetFoodGridCellInTheLastTailPosition();
+            if(_snakeSettings.CurrentHead.currentGridCell == null)
+                _snakeSettings.CurrentHead.currentGridCell = _gridInfo.GetGridCellByCoordinate(_snakeSettings.StartX.Value, _snakeSettings.StartY.Value);
 
             _snakeMover.Tick();
 
-            _snakeEater.ScaleTailsWithFood();
+            GridCell gridCellToGrow = _snakeEater.GetFoodGridCellInTheLastTailPosition();
 
             if (gridCellToGrow != null)
                 Grow(gridCellToGrow, _snakeSettings.TailPrefab);
 
+           
         }
     }
-
 
     private void Update()
     {
@@ -66,22 +71,26 @@ public class Snake : Entity
         SceneManager.LoadScene(0);
     }
 
-    public void Feed(GridCell currentGridCell)
+    public void Feed(GridCell currentGridCell, Entity collector)
     {
-        _snakeEater.AddGrowCoordinate(currentGridCell.coordinate);
+        _snakeEater.AddGrowCoordinate(currentGridCell.coordinate, collector);
     }
 
     public void Grow(GridCell newTailGridCell, GameObject tailPrefab)
     {
-        GameObject newTailGO = Instantiate(tailPrefab, null);
-        SnakeTail newTail = newTailGO.GetComponent<SnakeTail>();
+        GameObject newTailGO = Instantiate(tailPrefab, transform);
+        SnakePart newTail = newTailGO.GetComponent<SnakePart>();
 
-        newTail.currentGridCell = newTailGridCell;
-        newTail.Prox = _tail[_tail.Count - 1];
+        SnakePart lastSnakePart = (SnakePart)_snakeSettings.CurrentHead.Prox;
+        lastSnakePart.transform.localScale = new Vector3(_snakeSettings.StartScale.Value, _snakeSettings.StartScale.Value, _snakeSettings.StartScale.Value);
+        lastSnakePart.hasFood = false;
 
-        _tail.Add(newTail);
-        _snakeEater.RemoveGrowCoordinate(newTailGridCell.coordinate);
-        
+        newTail.currentGridCell = newTailGridCell; 
+        newTail.Prox = lastSnakePart;
+       
+        snakeParts.Add(newTail);
+        _snakeSettings.CurrentHead.Prox = newTail;
+
     }
 
 

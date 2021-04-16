@@ -22,6 +22,10 @@ public class SnakeSettings : ScriptableObject
     [SerializeField] private GameObject _tailPrefab;
     [SerializeField] private bool _isAI;
 
+
+    [Header("InGame")]
+    [SerializeField] private SnakePart _currentHead;
+
     public FloatVariable MovementsPerSecond { get { return _movementsPerSecond; } }
     public IntVariable StartX { get { return _startX; } }
     public IntVariable StartY { get { return _startY; } }
@@ -34,5 +38,7 @@ public class SnakeSettings : ScriptableObject
     public FloatVariable StartScale { get { return _startScale; } }
     public FloatVariable FeedScale { get { return _feedScale; } }
     public GameObject TailPrefab { get { return _tailPrefab; } }
+
+    public SnakePart CurrentHead { get { return _currentHead; }set { _currentHead = value; } }
     public bool IsAI { get { return _isAI; } }
 }

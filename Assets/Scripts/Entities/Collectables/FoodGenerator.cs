@@ -34,7 +34,8 @@ public class FoodGenerator : MonoBehaviour
 
     public void InstantiateFirstFood()
     {
-        InstantiateNewFood();
+        for(int i = 0; i < _collectableSettings.StartingCollectableCount; i++)
+            InstantiateNewFood();
     }
 
 }

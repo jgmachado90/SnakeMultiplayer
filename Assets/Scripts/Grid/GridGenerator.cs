@@ -8,6 +8,12 @@ public class GridGenerator : MonoBehaviour
     [Header("Grid")]
     [SerializeField] private GridSettings _gridSettings;
     [SerializeField] private GridInfo _gridInfo;
+    [SerializeField] private GridInstance _gridInstance;
+
+    public GameObject foodPrefab;
+    public GameObject enginePowerPrefab;
+    public GameObject PlayerPrefab;
+    public GameObject PlayerTail;
 
     [Header("Events")]
     public VoidEvent OnCreateGrid;
@@ -36,9 +42,23 @@ public class GridGenerator : MonoBehaviour
             }
         }
     }
+    public void CreateEntitiesByGridInstance()
+    {
+         Debug.Log("On time travel");
+        _gridInfo.ClearGrid();
+        for(int i=0; i < _gridInstance.EntitiesInGrid.Count; i++)
+        {
+            InstantiateEntityInGrid(_gridInstance.EntitiesInGrid[i], _gridInstance.EntitiesGridCell[i]);
+        }
+      
+    }
 
-    
-
+    private void InstantiateEntityInGrid(Entity entity, GridCell gridCell)
+    {
+        GameObject newEntityGO = Instantiate(entity.EntityInfo.EntityPrefab);
+        Entity newEntity = newEntityGO.GetComponent<Entity>();
+        newEntity.currentGridCell = gridCell;
+    }
 }
 
 
