@@ -257,17 +257,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6716359582729969355, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716359582729969355, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6716359582729969355, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
-      propertyPath: m_Color.r
-      value: 1
+    - target: {fileID: 1213772438, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
+      propertyPath: _snakeSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: a59933b21e6fc1d418ae23708d48f3a3, type: 2}
+    - target: {fileID: 5569670489110150321, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
+      propertyPath: unityEventResponse.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActivateEnginePowerUp
       objectReference: {fileID: 0}
     - target: {fileID: 6716359584110770925, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
       propertyPath: _snakeSettings
@@ -319,9 +315,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6716359584110770931, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
       propertyPath: m_Name
-      value: Snake (1)
+      value: Snake2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5569670489110150321, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
 --- !u!1001 &770218889948940675
 PrefabInstance:
@@ -452,6 +449,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6716359582729969355, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6716359582729969355, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6716359582729969355, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6716359584110770930, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -500,5 +509,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snake
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5569670489110150321, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}

@@ -10,7 +10,7 @@ public class EnginePower : Entity, ICollectable
     public void Collect(Entity collector)
     {
         collector.GetComponentInParent<Snake>().Feed(currentGridCell, collector);
-        OnCollectEnginePower.Raise();
+        collector.GetComponentInParent<EnginePowerUpController>().ActivateEnginePowerUp();
         OnCollectFood.Raise();
         Destroy(this.gameObject);
     }
