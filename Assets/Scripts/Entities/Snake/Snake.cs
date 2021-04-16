@@ -34,7 +34,7 @@ public class Snake : MonoBehaviour
     
         snakeParts.Add(_startingHead);
 
-        _snakeMover = new SnakeMover(_snakeInput, snakeParts, _snakeSettings, _gridInfo);
+        _snakeMover = new SnakeMover((ControllerInput)_snakeInput, snakeParts, _snakeSettings, _gridInfo);
         _snakeEater = new SnakeEater(snakeParts, _snakeSettings);
 
         _tickCoroutine = StartCoroutine(TickCoroutine());

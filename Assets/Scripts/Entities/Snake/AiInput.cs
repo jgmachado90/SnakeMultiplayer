@@ -6,8 +6,8 @@ public class AiInput : ISnakeInput
 {
    public void ReadInput()
     {
-        Direction = (Direction)Random.Range(0, 4);
+        MovingDirection = (Direction)Random.Range(0, 4);
     }
 
-    public Direction Direction { get; private set; }
+    public Direction MovingDirection { get; private set; }
 }

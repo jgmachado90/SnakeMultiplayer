@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class SnakeMover
 {
-    private readonly ISnakeInput _snakeInput;
+    private readonly ControllerInput _snakeInput;
     private readonly List<Entity> _snakePart;
     private readonly GridInfo _gridInfo;
     private readonly SnakeSettings _snakeSettings;
 
-    private Direction lookingDirection;
 
-    public SnakeMover(ISnakeInput snakeInput, List<Entity> snakePart, SnakeSettings snakeSettings, GridInfo gridInfo)
+    public SnakeMover(ControllerInput snakeInput, List<Entity> snakePart, SnakeSettings snakeSettings, GridInfo gridInfo)
     {
         _snakeInput = snakeInput;
         _snakePart = snakePart;
@@ -31,32 +30,36 @@ public class SnakeMover
         int newX = _snakeSettings.CurrentHead.currentGridCell.coordinate.x;
         int newY = _snakeSettings.CurrentHead.currentGridCell.coordinate.y;
 
-        if (_snakeInput.Direction == Direction.Up && lookingDirection != Direction.Down)
+        PrepareMovement(ref newX, ref newY);
+        MoveSnakeHead(newX, newY);
+    }
+
+    private void PrepareMovement(ref int newX, ref int newY)
+    {
+        if (_snakeInput.MovingDirection == Direction.Up)
         {
             newY++;
-            lookingDirection = Direction.Up;
+            _snakeInput.LookingDirection = Direction.Up;
             _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 90);
         }
-        else if (_snakeInput.Direction == Direction.Down && lookingDirection != Direction.Up)
+        else if (_snakeInput.MovingDirection == Direction.Down)
         {
             newY--;
-            lookingDirection = Direction.Down;
+            _snakeInput.LookingDirection = Direction.Down;
             _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, -90);
         }
-        else if (_snakeInput.Direction == Direction.Left && lookingDirection != Direction.Right)
+        else if (_snakeInput.MovingDirection == Direction.Left)
         {
             newX--;
-            lookingDirection = Direction.Left;
+            _snakeInput.LookingDirection = Direction.Left;
             _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 180);
         }
-        else if (_snakeInput.Direction == Direction.Right && lookingDirection != Direction.Left)
+        else if (_snakeInput.MovingDirection == Direction.Right)
         {
-            lookingDirection = Direction.Right;
             newX++;
+            _snakeInput.LookingDirection = Direction.Right;
             _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
-
-        MoveSnakeHead(newX, newY);
     }
 
     private void MoveSnakeHead(int newX, int newY)

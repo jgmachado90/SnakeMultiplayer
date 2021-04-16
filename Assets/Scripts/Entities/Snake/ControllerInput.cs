@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class ControllerInput : ISnakeInput
 {
-    //TODO CHANGE ALL THIS TRASH
+    private Direction _lookingDirection;
+    public Direction LookingDirection { get { return _lookingDirection; } set { _lookingDirection = value; } }
+
+    //TODO CHANGE ASAP
     public void ReadInput()
     {
 
-            if (Input.GetKeyDown(KeyCode.A))
-        {
-            int nextDirectionIndex = (int) Direction;
-            if (nextDirectionIndex - 1 < 0)
-                nextDirectionIndex = 4;
-            Direction = (Direction)(nextDirectionIndex-1);
-        }
+        if (Input.GetKeyDown(KeyCode.A))
+            _ = ((int)LookingDirection - 1) < 0 ? MovingDirection = (Direction)3 : MovingDirection = LookingDirection - 1;           
+
 
         if (Input.GetKeyDown(KeyCode.D))
-        {
-            int nextDirectionIndex = (int)Direction;
-            if (nextDirectionIndex + 1 > 3)
-                nextDirectionIndex = -1;
-            Direction = (Direction)(int)nextDirectionIndex + 1;
-        }
+            _ = ((int)LookingDirection + 1) > 3 ? MovingDirection = 0 : MovingDirection = LookingDirection + 1;
+
     }
 
-    public Direction Direction { get; private set; }
+    public Direction MovingDirection { get; private set; }
 }
