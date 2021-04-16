@@ -27,14 +27,14 @@ public class Snake : MonoBehaviour
 
     private void Awake()
     {
-        _snakeInput = _snakeSettings.IsAI ? new AiInput() as ISnakeInput : new ControllerInput();
+        _snakeInput = _snakeSettings.IsAI ? new Player2Input() as ISnakeInput : new ControllerInput();
 
         _startingHead.Prox = _startingHead;
         _snakeSettings.CurrentHead = _startingHead;
     
         snakeParts.Add(_startingHead);
 
-        _snakeMover = new SnakeMover((ControllerInput)_snakeInput, snakeParts, _snakeSettings, _gridInfo);
+        _snakeMover = new SnakeMover(_snakeInput, snakeParts, _snakeSettings, _gridInfo);
         _snakeEater = new SnakeEater(snakeParts, _snakeSettings);
 
         _tickCoroutine = StartCoroutine(TickCoroutine());

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerInput : ISnakeInput
+public class Player2Input : ISnakeInput
 {
     public Direction LookingDirection { get; set; }
 
@@ -10,11 +10,11 @@ public class ControllerInput : ISnakeInput
     public void ReadInput()
     {
 
-        if (Input.GetKeyDown(KeyCode.A))
-            _ = ((int)LookingDirection - 1) < 0 ? MovingDirection = (Direction)3 : MovingDirection = LookingDirection - 1;           
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+            _ = ((int)LookingDirection - 1) < 0 ? MovingDirection = (Direction)3 : MovingDirection = LookingDirection - 1;
 
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
             _ = ((int)LookingDirection + 1) > 3 ? MovingDirection = 0 : MovingDirection = LookingDirection + 1;
 
     }

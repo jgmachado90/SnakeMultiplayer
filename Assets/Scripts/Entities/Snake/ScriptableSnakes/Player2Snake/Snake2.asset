@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a3f14d80125ba445b4dcf2d61a07828, type: 3}
+  m_Name: Snake2
+  m_EditorClassIdentifier: 
+  _movementsPerSecond: {fileID: 11400000, guid: c30b7bc0e52f5cf41b7c034a48534a1e, type: 2}
+  _startX: {fileID: 11400000, guid: 90106afbda3818545b7a1192f6b84bf2, type: 2}
+  _startY: {fileID: 11400000, guid: d47920b5f304dbc488838ee1682a011b, type: 2}
+  _speedDebuff: {fileID: 11400000, guid: 455adfbeefeef9e4cb42b45cda010e34, type: 2}
+  _speedBuff: {fileID: 11400000, guid: 7631f175bc968ef48ab6e0be1ac83e2c, type: 2}
+  _snakeMaxSpeed: {fileID: 11400000, guid: 34d787ec373c22943a52d293592a2ff8, type: 2}
+  _startScale: {fileID: 11400000, guid: 1589eb4ba1cd86c44929f38a75e4b777, type: 2}
+  _feedScale: {fileID: 11400000, guid: 945bddbfa62f61b48906690e8cac6a0b, type: 2}
+  _tailPrefab: {fileID: 8384964726246217981, guid: 9f085cc873169c544bbd58a92dd77652, type: 3}
+  _isAI: 1
+  _currentHead: {fileID: 0}

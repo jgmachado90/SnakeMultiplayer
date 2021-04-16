@@ -27,12 +27,24 @@ public class SnakeEater
 
     public float GetSnakeCurrentSpeed()
     {
-        float speedDebuff = 0; // _snakeSettings.SpeedDebuff.Value * _growPositions.Count;
+        float speedDebuff = _snakeSettings.SpeedDebuff.Value * GetLoadedCount();
         float speedBuff = _snakeSettings.SpeedBuff.Value;
         float finalSpeed = _snakeSettings.MovementsPerSecond.Value + speedDebuff - speedBuff;
         return finalSpeed > 0 ? finalSpeed : _snakeSettings.SnakeMaxSpeed.Value;
     }
 
+    private int GetLoadedCount()
+    {
+        int count = 0;
+        foreach(SnakePart snakePart in _snakeParts)
+        {
+            if (snakePart.hasFood)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
 
     public void AddGrowCoordinate(GridCellCoordinates coordinates, Entity collector)
     {

@@ -12,5 +12,6 @@ public enum Direction
 public interface ISnakeInput {
     void ReadInput();
     Direction MovingDirection { get; }
+    Direction LookingDirection { get; set; }
 
 }

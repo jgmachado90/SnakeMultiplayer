@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class SnakeMover
 {
-    private readonly ControllerInput _snakeInput;
+    private readonly ISnakeInput _snakeInput;
     private readonly List<Entity> _snakePart;
     private readonly GridInfo _gridInfo;
     private readonly SnakeSettings _snakeSettings;
 
 
-    public SnakeMover(ControllerInput snakeInput, List<Entity> snakePart, SnakeSettings snakeSettings, GridInfo gridInfo)
+    public SnakeMover(ISnakeInput snakeInput, List<Entity> snakePart, SnakeSettings snakeSettings, GridInfo gridInfo)
     {
         _snakeInput = snakeInput;
         _snakePart = snakePart;
