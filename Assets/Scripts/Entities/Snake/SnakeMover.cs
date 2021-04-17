@@ -6,15 +6,13 @@ using UnityEngine;
 public class SnakeMover
 {
     private readonly ISnakeInput _snakeInput;
-    private readonly List<Entity> _snakePart;
     private readonly GridInfo _gridInfo;
     private readonly SnakeSettings _snakeSettings;
 
 
-    public SnakeMover(ISnakeInput snakeInput, List<Entity> snakePart, SnakeSettings snakeSettings, GridInfo gridInfo)
+    public SnakeMover(ISnakeInput snakeInput, SnakeSettings snakeSettings, GridInfo gridInfo)
     {
         _snakeInput = snakeInput;
-        _snakePart = snakePart;
         _gridInfo = gridInfo;
         _snakeSettings = snakeSettings;
     }
@@ -40,25 +38,25 @@ public class SnakeMover
         {
             newY++;
             _snakeInput.LookingDirection = Direction.Up;
-            _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 90);
+            _snakeSettings.CurrentHead.Prev.transform.localRotation = Quaternion.Euler(0, 0, 90);
         }
         else if (_snakeInput.MovingDirection == Direction.Down)
         {
             newY--;
             _snakeInput.LookingDirection = Direction.Down;
-            _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, -90);
+            _snakeSettings.CurrentHead.Prev.transform.localRotation = Quaternion.Euler(0, 0, -90);
         }
         else if (_snakeInput.MovingDirection == Direction.Left)
         {
             newX--;
             _snakeInput.LookingDirection = Direction.Left;
-            _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 180);
+            _snakeSettings.CurrentHead.Prev.transform.localRotation = Quaternion.Euler(0, 0, 180);
         }
         else if (_snakeInput.MovingDirection == Direction.Right)
         {
             newX++;
             _snakeInput.LookingDirection = Direction.Right;
-            _snakeSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            _snakeSettings.CurrentHead.Prev.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
@@ -76,7 +74,7 @@ public class SnakeMover
 
         if (nextCell.entityOcupating is ICollectable)
         {
-            nextCell.entityOcupating.GetComponent<ICollectable>().Collect(_snakeSettings.CurrentHead.Prox);
+            nextCell.entityOcupating.GetComponent<ICollectable>().Collect(_snakeSettings.CurrentHead.Prev);
         }
 
         else if (nextCell.entityOcupating.typeOfEntity == Entity.TypeOfEntity.Player)
@@ -87,13 +85,13 @@ public class SnakeMover
 
     private void SetPosition(Entity entity, int x, int y)
     {
-        SnakePart lastPart = (SnakePart)_snakeSettings.CurrentHead.Prox;
+        SnakePart lastPart = _snakeSettings.CurrentHead.Prev;
 
         lastPart.currentGridCell = _gridInfo.GetGridCellByCoordinate(x, y);
         lastPart.transform.position = new Vector3(lastPart.currentGridCell.coordinate.x, lastPart.currentGridCell.coordinate.y, 0);
 
-        _snakeSettings.CurrentHead.isHead = false;
+        _snakeSettings.CurrentHead.IsHead = false;
         _snakeSettings.CurrentHead = lastPart;
-        lastPart.isHead = true;
+        lastPart.IsHead = true;
     }
 }

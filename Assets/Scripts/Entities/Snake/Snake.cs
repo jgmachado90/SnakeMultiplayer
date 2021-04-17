@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.SceneManagement;
 
 public class Snake : MonoBehaviour
@@ -23,27 +24,26 @@ public class Snake : MonoBehaviour
     public SnakePart _startingHead;
 
 
-    private List<Entity> snakeParts = new List<Entity>();
-
-
-
     private void Awake()
     {
+        _snakeSettings.Clear();
         _snakeInput = _snakeSettings.IsAI ? new Player2Input() as ISnakeInput : new ControllerInput();
 
         StartSnake();
 
-        _snakeMover = new SnakeMover(_snakeInput, snakeParts, _snakeSettings, _gridInfo);
-        _snakeEater = new SnakeEater(snakeParts, _snakeSettings);
+        _snakeMover = new SnakeMover(_snakeInput, _snakeSettings, _gridInfo);
+        _snakeEater = new SnakeEater(_snakeSettings);
 
         _tickCoroutine = StartCoroutine(TickCoroutine());
     }
 
     public void StartSnake()
     {
+        _startingHead.IsHead = true;
         _startingHead.Prox = _startingHead;
+        _startingHead.Prev = _startingHead;
         _snakeSettings.CurrentHead = _startingHead;
-        snakeParts.Add(_startingHead);
+        _snakeSettings.Snake.Add(_startingHead);
     }
 
     IEnumerator TickCoroutine()
@@ -75,13 +75,14 @@ public class Snake : MonoBehaviour
     internal void Die()
     {
         //ReloadThisSnake();
+        GetComponent<TimeTravelPowerUpController>().ActivatePowerUp();
     }
 
     private void ReloadThisSnake()
     {
-        foreach(SnakePart parts in snakeParts)
+        foreach(SnakePart parts in _snakeSettings.Snake)
         {
-            if (parts.isHead)
+            if (parts.IsHead)
             {
                 _snakeSettings.CurrentHead.currentGridCell = _gridInfo.GetGridCellByCoordinate(_snakeSettings.StartX.Value, _snakeSettings.StartY.Value);
             }
@@ -100,15 +101,36 @@ public class Snake : MonoBehaviour
         GameObject newTailGO = Instantiate(tailPrefab, transform);
         SnakePart newTail = newTailGO.GetComponent<SnakePart>();
 
-        SnakePart lastSnakePart = (SnakePart)_snakeSettings.CurrentHead.Prox;
+        SnakePart lastSnakePart = _snakeSettings.CurrentHead.Prev;
         lastSnakePart.transform.localScale = new Vector3(_snakeSettings.StartScale.Value, _snakeSettings.StartScale.Value, _snakeSettings.StartScale.Value);
         lastSnakePart.hasFood = false;
 
-        newTail.currentGridCell = newTailGridCell; 
-        newTail.Prox = lastSnakePart;
-       
-        snakeParts.Add(newTail);
-        _snakeSettings.CurrentHead.Prox = newTail;
+        newTail.currentGridCell = newTailGridCell;
+
+        if (_snakeSettings.CurrentHead.Prox == _snakeSettings.CurrentHead)
+        {
+            _snakeSettings.CurrentHead.Prox = newTail;
+            _snakeSettings.CurrentHead.Prev = newTail;
+
+            newTail.Prox = _snakeSettings.CurrentHead;
+            newTail.Prev = _snakeSettings.CurrentHead;
+        }
+
+        else
+        {
+            SnakePart oldTail = _snakeSettings.CurrentHead.Prev;
+
+            oldTail.Prox = newTail;
+            _snakeSettings.CurrentHead.Prev = newTail;
+
+            newTail.Prev = oldTail;
+            newTail.Prox = _snakeSettings.CurrentHead;
+        
+        }
+
+        _snakeSettings.Snake.Add(newTail);
+
+    
 
     }
 

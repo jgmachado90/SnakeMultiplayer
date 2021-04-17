@@ -13,14 +13,20 @@ public class FoodGenerator : MonoBehaviour
 
     public void InstantiateNewFood()
     {
-        if(UnityEngine.Random.Range(0,2) < 1)
+        int rNG = UnityEngine.Random.Range(0, 10);
+        if (rNG > 4)
         {
             InstantiateFood(_collectableSettings.FoodPrefab);
         }
-        else
+        else if(rNG > 2 )
         {
             InstantiateFood(_collectableSettings.EnginePowerPrefab);
         }
+        else
+        {
+            InstantiateFood(_collectableSettings.BatteringRamPrefab);
+        }
+
 
         
     }

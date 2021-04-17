@@ -71,6 +71,7 @@ public class GridInfo : ScriptableObject
     {
         foreach(Entity entity in GetEntities())
         {
+            entity.currentGridCell.RemoveEntityFromThisCell();
             Destroy(entity.gameObject);
         }
     }

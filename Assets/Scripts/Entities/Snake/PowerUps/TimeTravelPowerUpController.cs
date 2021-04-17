@@ -7,7 +7,7 @@ public class TimeTravelPowerUpController : MonoBehaviour
     [SerializeField] private GridInstance _gridInstance;
     [SerializeField] private GridInfo _gridInfo;
 
-    [SerializeField] private VoidEvent _OnTimeTravel;
+    [SerializeField] private GridInstanceEvent _OnTimeTravel;
 
 
     private void Start()
@@ -16,20 +16,19 @@ public class TimeTravelPowerUpController : MonoBehaviour
         _gridInfo._emptyCells.Clear();
         //_gridInstance.EntitiesInfo.Clear();
     }
+
+    public void OnCollectTimeTravelPowerUp()
+    {
+        _gridInstance.SaveGridInstance();
+    }
+
+    public void ActivatePowerUp()
+    {
+        _OnTimeTravel.Raise(_gridInstance);
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            _gridInstance.SaveGridInstance();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            _OnTimeTravel.Raise();
-        }
-
-
-
 
     }
 }

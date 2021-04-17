@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b100c697cab532429f390872a6c3da2, type: 3}
-  m_Name: GridInstance
+  m_Script: {fileID: 11500000, guid: 64704191fda240d49824728a1f7101ed, type: 3}
+  m_Name: BateringRamEntityInfo
   m_EditorClassIdentifier: 
-  _gridInfo: {fileID: 11400000, guid: 8838147c7d4a90344ab52c49d717a7bd, type: 2}
-  _entitiesInGrid:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _entityPrefab: {fileID: 9158487608503621276, guid: 676a1959e296fc74d8c109d3b76a31b5, type: 3}

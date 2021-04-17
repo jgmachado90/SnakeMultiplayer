@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6716359584110770930}
   - component: {fileID: 6716359584110770925}
   - component: {fileID: 1213772438}
+  - component: {fileID: 1635880643}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f714ce54e8c78419156291e60f1855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _snakeSettings: {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
+  _snakeSettings: {fileID: 11400000, guid: a59933b21e6fc1d418ae23708d48f3a3, type: 2}
   _gridInfo: {fileID: 11400000, guid: 8838147c7d4a90344ab52c49d717a7bd, type: 2}
   _startingHead: {fileID: 2316877584887877882}
 --- !u!114 &1213772438
@@ -60,8 +61,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9bf09f62231df04fad48bd9738b9f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _snakeSettings: {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
+  _snakeSettings: {fileID: 11400000, guid: a59933b21e6fc1d418ae23708d48f3a3, type: 2}
   _snakeBuff: {fileID: 11400000, guid: 239963a259615e546a1f80353ba3d1f8, type: 2}
+--- !u!114 &1635880643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6716359584110770931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77cf1e98591a5f40946b4f8350a16f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gridInstance: {fileID: 11400000, guid: 15502227a1cb34040b71973a6b2174d4, type: 2}
+  _gridInfo: {fileID: 11400000, guid: 8838147c7d4a90344ab52c49d717a7bd, type: 2}
+  _OnTimeTravel: {fileID: 11400000, guid: 7f819b0ee20718442ab3fea43d742215, type: 2}
 --- !u!1001 &6716359582420670107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -69,6 +85,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6716359584110770930}
     m_Modifications:
+    - target: {fileID: 2509476383913175618, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2509476383913175618, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2509476383913175619, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -121,6 +145,10 @@ PrefabInstance:
       propertyPath: isHead
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9012404994795046497, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
+      propertyPath: _entityInfo
+      value: 
+      objectReference: {fileID: 11400000, guid: 10a240eb8fe1b7c4d9e1d8df6206b967, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
 --- !u!4 &9216121913663421656 stripped

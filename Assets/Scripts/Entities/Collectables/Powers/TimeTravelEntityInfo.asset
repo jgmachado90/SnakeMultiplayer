@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3d10baa2ffcfa0419c88e40c9c0fc71, type: 3}
-  m_Name: OnTimeTravel
+  m_Script: {fileID: 11500000, guid: 64704191fda240d49824728a1f7101ed, type: 3}
+  m_Name: TimeTravelEntityInfo
   m_EditorClassIdentifier: 
+  _entityPrefab: {fileID: 9158487608503621276, guid: ec7d4d041430c454db7bbbdf97f9ba1e, type: 3}

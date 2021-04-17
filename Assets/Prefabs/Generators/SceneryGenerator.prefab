@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5896730198128607057}
   - component: {fileID: 5896730198128607058}
+  - component: {fileID: 151709923}
   m_Layer: 0
   m_Name: SceneryGenerator
   m_TagString: Untagged
@@ -45,9 +46,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridSettings: {fileID: 11400000, guid: fb2d2b74f42ac4641b45a8378f730510, type: 2}
   _gridInfo: {fileID: 11400000, guid: 8838147c7d4a90344ab52c49d717a7bd, type: 2}
-  _gridInstance: {fileID: 11400000, guid: 761ea322db25c5d43b5df1c7de08a928, type: 2}
   foodPrefab: {fileID: 9158487608503621276, guid: 0cc51c6ecdf0b914482f90ed09fead15, type: 3}
   enginePowerPrefab: {fileID: 9158487608503621276, guid: fd267640c3bcc154db0ce04460ec0bc1, type: 3}
-  PlayerPrefab: {fileID: 0}
-  PlayerTail: {fileID: 0}
+  snakePartPrefab: {fileID: 0}
   OnCreateGrid: {fileID: 11400000, guid: 631266a263b0c674cbfc250cba7deec2, type: 2}
+--- !u!114 &151709923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5896730198128607059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36de863b64fc4204fbf6ad7d24174666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 7f819b0ee20718442ab3fea43d742215, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5896730198128607058}
+        m_TargetAssemblyTypeName: GridGenerator, Assembly-CSharp
+        m_MethodName: CreateEntitiesByGridInstance
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -5,22 +5,19 @@ using UnityEngine;
 
 public class SnakeEater
 {
-    private readonly List<Entity> _snakeParts;
     private readonly SnakeSettings _snakeSettings;
 
-    public SnakeEater(List<Entity> snakeParts, SnakeSettings snakeSettings)
+    public SnakeEater(SnakeSettings snakeSettings)
     {
-        _snakeParts = snakeParts;
         _snakeSettings = snakeSettings;
     }
 
     public GridCell GetFoodGridCellInTheLastTailPosition()
     {
-        SnakePart lastSnakePart =(SnakePart)_snakeSettings.CurrentHead.Prox;
-
-        if (lastSnakePart.hasFood)
+        SnakePart currentTail = _snakeSettings.CurrentHead.Prev;
+        if (currentTail.hasFood)
         {
-            return lastSnakePart.currentGridCell;
+            return currentTail.currentGridCell;
         }
         return null;
     }
@@ -36,7 +33,7 @@ public class SnakeEater
     private int GetLoadedCount()
     {
         int count = 0;
-        foreach(SnakePart snakePart in _snakeParts)
+        foreach(SnakePart snakePart in _snakeSettings.Snake)
         {
             if (snakePart.hasFood)
             {

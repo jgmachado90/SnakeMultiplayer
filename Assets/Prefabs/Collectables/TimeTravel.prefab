@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9158487608503621272}
   - component: {fileID: 9158487608503621273}
-  - component: {fileID: 8979991264384508787}
+  - component: {fileID: 6054665984889678651}
   m_Layer: 0
-  m_Name: EnginePower
+  m_Name: TimeTravel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 8ab0a2532eddec141b6396f197c5ab50, type: 3}
-  m_Color: {r: 1, g: 0.57853, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 54c47620d7120a74799a049e16086d98, type: 3}
+  m_Color: {r: 0, g: 0.6754477, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8979991264384508787
+--- !u!114 &6054665984889678651
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,10 +92,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9158487608503621276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f93d72bb8e74b47bd492a0361dc091, type: 3}
+  m_Script: {fileID: 11500000, guid: a2e0844e1960d704fae6e33d3544b988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _typeOfEntity: 3
-  _entityInfo: {fileID: 11400000, guid: d857be398373cec469d78705f1849ee5, type: 2}
-  OnCollectEnginePower: {fileID: 11400000, guid: 5c7517cff9d5a504f8041894a2e45613, type: 2}
+  _entityInfo: {fileID: 11400000, guid: 1b0a23a59767dfc45b9ff84471a6daf6, type: 2}
   OnCollectFood: {fileID: 11400000, guid: cbbcebb942c98e541964205dd4489348, type: 2}

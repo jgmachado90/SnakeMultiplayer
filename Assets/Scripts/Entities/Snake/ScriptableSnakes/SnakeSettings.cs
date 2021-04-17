@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenu(menuName = "Snake/Settings", fileName = "SnakeData")]
 public class SnakeSettings : ScriptableObject
 {
@@ -24,7 +25,9 @@ public class SnakeSettings : ScriptableObject
 
 
     [Header("InGame")]
+    [SerializeField] private bool _hasBatteringRam;
     [SerializeField] private SnakePart _currentHead;
+    [SerializeField] private List<SnakePart> _snake;
 
     public FloatVariable MovementsPerSecond { get { return _movementsPerSecond; } }
     public IntVariable StartX { get { return _startX; } }
@@ -40,5 +43,14 @@ public class SnakeSettings : ScriptableObject
     public GameObject TailPrefab { get { return _tailPrefab; } }
 
     public SnakePart CurrentHead { get { return _currentHead; }set { _currentHead = value; } }
+    public List<SnakePart> Snake { get { return _snake; } set { _snake = value; } }
     public bool IsAI { get { return _isAI; } }
+
+    public bool HasBatteringRam { get { return _hasBatteringRam; } set { _hasBatteringRam = value; } }
+
+    public void Clear() {
+
+        Snake.Clear();
+        HasBatteringRam = false;
+    }
 }
