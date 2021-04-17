@@ -8,9 +8,11 @@ public class Snake : MonoBehaviour
 {
     [Header("Snake")]
     [SerializeField] private SnakeSettings _snakeSettings;
+    
 
     [Header("Grid")]
     [SerializeField] private GridInfo _gridInfo;
+
 
     private ISnakeInput _snakeInput;
     private SnakeMover _snakeMover;
@@ -29,15 +31,19 @@ public class Snake : MonoBehaviour
     {
         _snakeInput = _snakeSettings.IsAI ? new Player2Input() as ISnakeInput : new ControllerInput();
 
-        _startingHead.Prox = _startingHead;
-        _snakeSettings.CurrentHead = _startingHead;
-    
-        snakeParts.Add(_startingHead);
+        StartSnake();
 
         _snakeMover = new SnakeMover(_snakeInput, snakeParts, _snakeSettings, _gridInfo);
         _snakeEater = new SnakeEater(snakeParts, _snakeSettings);
 
         _tickCoroutine = StartCoroutine(TickCoroutine());
+    }
+
+    public void StartSnake()
+    {
+        _startingHead.Prox = _startingHead;
+        _snakeSettings.CurrentHead = _startingHead;
+        snakeParts.Add(_startingHead);
     }
 
     IEnumerator TickCoroutine()
@@ -68,7 +74,20 @@ public class Snake : MonoBehaviour
 
     internal void Die()
     {
-        SceneManager.LoadScene(0);
+        //ReloadThisSnake();
+    }
+
+    private void ReloadThisSnake()
+    {
+        foreach(SnakePart parts in snakeParts)
+        {
+            if (parts.isHead)
+            {
+                _snakeSettings.CurrentHead.currentGridCell = _gridInfo.GetGridCellByCoordinate(_snakeSettings.StartX.Value, _snakeSettings.StartY.Value);
+            }
+            Destroy(parts.gameObject);
+        }
+
     }
 
     public void Feed(GridCell currentGridCell, Entity collector)
@@ -93,6 +112,8 @@ public class Snake : MonoBehaviour
 
     }
 
+
+    
 
 
 }

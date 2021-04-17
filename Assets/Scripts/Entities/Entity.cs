@@ -19,6 +19,7 @@ public class Entity : MonoBehaviour
     {
         set
         {
+            if (value == null) return;
             if(_currentGridCell != null)
             {
                 if(currentGridCell.entityOcupating == this)

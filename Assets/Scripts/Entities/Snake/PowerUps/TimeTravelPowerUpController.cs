@@ -12,7 +12,9 @@ public class TimeTravelPowerUpController : MonoBehaviour
 
     private void Start()
     {
-        _gridInstance.EntitiesInGrid.Clear();
+        _gridInfo._gridCells.Clear();
+        _gridInfo._emptyCells.Clear();
+        //_gridInstance.EntitiesInfo.Clear();
     }
     private void Update()
     {

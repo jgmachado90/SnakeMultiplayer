@@ -66,6 +66,7 @@ public class GridInfo : ScriptableObject
         return entities;
     }
 
+
     public void ClearGrid()
     {
         foreach(Entity entity in GetEntities())

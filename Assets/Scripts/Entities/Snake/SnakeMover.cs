@@ -78,6 +78,7 @@ public class SnakeMover
         {
             nextCell.entityOcupating.GetComponent<ICollectable>().Collect(_snakeSettings.CurrentHead.Prox);
         }
+
         else if (nextCell.entityOcupating.typeOfEntity == Entity.TypeOfEntity.Player)
         {
             _snakeSettings.CurrentHead.GetComponentInParent<Snake>().Die();

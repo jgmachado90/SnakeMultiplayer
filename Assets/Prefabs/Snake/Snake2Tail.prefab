@@ -96,6 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _typeOfEntity: 0
-  _entityInfo: {fileID: 11400000, guid: a461e1d4903835844871affda6a5ac77, type: 2}
+  _entityInfo: {fileID: 11400000, guid: 10a240eb8fe1b7c4d9e1d8df6206b967, type: 2}
   isHead: 0
   hasFood: 0

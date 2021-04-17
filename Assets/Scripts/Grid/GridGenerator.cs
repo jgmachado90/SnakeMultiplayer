@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class GridGenerator : MonoBehaviour
 {
     [Header("Grid")]
@@ -12,8 +12,7 @@ public class GridGenerator : MonoBehaviour
 
     public GameObject foodPrefab;
     public GameObject enginePowerPrefab;
-    public GameObject PlayerPrefab;
-    public GameObject PlayerTail;
+    public GameObject snakePartPrefab;
 
     [Header("Events")]
     public VoidEvent OnCreateGrid;
@@ -42,22 +41,84 @@ public class GridGenerator : MonoBehaviour
             }
         }
     }
+
     public void CreateEntitiesByGridInstance()
     {
-         Debug.Log("On time travel");
         _gridInfo.ClearGrid();
-        for(int i=0; i < _gridInstance.EntitiesInGrid.Count; i++)
-        {
-            InstantiateEntityInGrid(_gridInstance.EntitiesInGrid[i], _gridInstance.EntitiesGridCell[i]);
-        }
-      
+
+        CreateSnakes();
+        CreateCollectables();
+
     }
 
-    private void InstantiateEntityInGrid(Entity entity, GridCell gridCell)
+    private void CreateCollectables()
     {
-        GameObject newEntityGO = Instantiate(entity.EntityInfo.EntityPrefab);
+        foreach(Tuple<int, int, GameObject, Transform> collectable in _gridInstance.EveryCollectable)
+        {
+            int x = collectable.Item1;
+            int y = collectable.Item2;
+            GameObject entityPrefab = collectable.Item3;
+            Transform parent = collectable.Item4;
+
+            InstantiateCollectablesInTheGrid(entityPrefab, _gridInfo.GetGridCellByCoordinate(x, y), parent);
+
+        }
+    }
+
+    private void InstantiateCollectablesInTheGrid(GameObject entityPrefab, GridCell gridCell, Transform parent)
+    {
+        GameObject newEntityGO = Instantiate(entityPrefab, parent);
         Entity newEntity = newEntityGO.GetComponent<Entity>();
         newEntity.currentGridCell = gridCell;
+    }
+
+    private void CreateSnakes()
+    {
+        foreach (List<Tuple<int, int, GameObject, Transform, bool>> snakes in _gridInstance.EverySnake)
+        {
+            SnakePart aux = null;
+            foreach (Tuple<int, int, GameObject, Transform, bool> snakePart in snakes)
+            {
+
+                int x = snakePart.Item1;
+                int y = snakePart.Item2;
+                GameObject entityPrefab = snakePart.Item3;
+                Transform parent = snakePart.Item4;
+                bool isHead = snakePart.Item5;
+
+                SnakePart instantiatedSnakePart = InstantiateSnakesInTheGrid(entityPrefab, _gridInfo.GetGridCellByCoordinate(x, y), parent, isHead);
+
+                if (snakes.Last() == snakePart)
+                {
+                    Snake snake = parent.GetComponent<Snake>();
+                    snake._startingHead.Prox = instantiatedSnakePart;
+                }
+
+                if (aux != null)
+                {
+                    instantiatedSnakePart.Prox = aux;
+                }
+
+                aux = instantiatedSnakePart;
+            }
+        }
+    }
+
+    private SnakePart InstantiateSnakesInTheGrid(GameObject entityPrefab, GridCell gridCell, Transform parent, bool isHead)
+    {
+        GameObject newEntityGO = Instantiate(entityPrefab, parent);
+        Entity newEntity = newEntityGO.GetComponent<Entity>();
+        newEntity.currentGridCell = gridCell;
+
+        if (isHead)
+        {
+            Snake snake = parent.GetComponent<Snake>();
+            snake._startingHead = (SnakePart)newEntity;
+            snake.StartSnake();
+        }
+
+        return (SnakePart)newEntity;
+
     }
 }
 
