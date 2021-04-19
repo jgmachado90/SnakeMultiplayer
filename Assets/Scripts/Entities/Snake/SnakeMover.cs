@@ -2,34 +2,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SnakeMover
 {
     private readonly ISnakeInput _snakeInput;
-    private readonly GridInfo _gridInfo;
-    private readonly SnakeSettings _snakeSettings;
+    private readonly GridManager _gridManager;
+    private readonly SnakeInGameSettings _snakeInGameSettings;
 
 
-    public SnakeMover(ISnakeInput snakeInput, SnakeSettings snakeSettings, GridInfo gridInfo)
+    public SnakeMover(ISnakeInput snakeInput, SnakeSettings snakeSettings, GridManager gridManager)
     {
         _snakeInput = snakeInput;
-        _gridInfo = gridInfo;
-        _snakeSettings = snakeSettings;
+        _gridManager = gridManager;
+        _snakeInGameSettings = snakeSettings.SnakeInGameSettings;
     }
 
     public void Tick()
     {
-        if (_snakeSettings.CurrentHead.currentGridCell == null) return;
+        if (_snakeInGameSettings.CurrentHead.currentGridCell == null) return;
         ApplyMovement();
     }
 
     private void ApplyMovement()
     {
-        int newX = _snakeSettings.CurrentHead.currentGridCell.coordinate.x;
-        int newY = _snakeSettings.CurrentHead.currentGridCell.coordinate.y;
+        int newX = _snakeInGameSettings.CurrentHead.currentGridCell.coordinate.x;
+        int newY = _snakeInGameSettings.CurrentHead.currentGridCell.coordinate.y;
 
         PrepareMovement(ref newX, ref newY);
+
+        MoveFoodBlock();
+
+        if (_snakeInGameSettings.Snake.Count - 1 > 0)
+            MoveSnakeBlocks();
+
         MoveSnakeHead(newX, newY);
+        
     }
 
     private void PrepareMovement(ref int newX, ref int newY)
@@ -38,60 +46,98 @@ public class SnakeMover
         {
             newY++;
             _snakeInput.LookingDirection = Direction.Up;
-            _snakeSettings.CurrentHead.Prev.transform.localRotation = Quaternion.Euler(0, 0, 90);
+            _snakeInGameSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 90);
         }
         else if (_snakeInput.MovingDirection == Direction.Down)
         {
             newY--;
             _snakeInput.LookingDirection = Direction.Down;
-            _snakeSettings.CurrentHead.Prev.transform.localRotation = Quaternion.Euler(0, 0, -90);
+            _snakeInGameSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, -90);
         }
         else if (_snakeInput.MovingDirection == Direction.Left)
         {
             newX--;
             _snakeInput.LookingDirection = Direction.Left;
-            _snakeSettings.CurrentHead.Prev.transform.localRotation = Quaternion.Euler(0, 0, 180);
+            _snakeInGameSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 180);
         }
         else if (_snakeInput.MovingDirection == Direction.Right)
         {
             newX++;
             _snakeInput.LookingDirection = Direction.Right;
-            _snakeSettings.CurrentHead.Prev.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            _snakeInGameSettings.CurrentHead.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+
+    private void MoveSnakeBlocks()
+    {
+        int snakeLength = _snakeInGameSettings.Snake.Count - 1;
+        List<SnakeBlock> snake = _snakeInGameSettings.Snake;
+
+        for (int i = snakeLength; i > 0; i--)
+        {
+            snake[i].currentGridCell = snake[i - 1].currentGridCell;
+        }
+
+    }
+
+    private void MoveFoodBlock()
+    {
+        int snakeLength = _snakeInGameSettings.Snake.Count - 1;
+        List<SnakeBlock> snake = _snakeInGameSettings.Snake;
+
+        for (int i = snakeLength; i >= 0; i--)
+        {
+            if (snake[i] != _snakeInGameSettings.Snake.Last() && snake[i].HasFood)
+            {
+                snake[i].HasFood = false;
+                snake[i + 1].HasFood = true;
+            }
         }
     }
 
     private void MoveSnakeHead(int newX, int newY)
     {
-        CheckNextCellEntities(newX, newY);
-        SetPosition(_snakeSettings.CurrentHead, newX, newY);
+
+        bool dead = CheckNextCellEntities(newX, newY);
+        if(!dead)
+            _snakeInGameSettings.CurrentHead.currentGridCell = _gridManager.GetGridCellByCoordinate(newX, newY);
     }
 
-    private void CheckNextCellEntities(int x, int y)
+    private bool CheckNextCellEntities(int x, int y)
     {
-        GridCell nextCell = _gridInfo.GetGridCellByCoordinate(x, y);
-        if(nextCell == null)return;
-        if (nextCell.entityOcupating == null) return;
+        GridCell nextCell = _gridManager.GetGridCellByCoordinate(x, y);
+        if(nextCell == null)return false;
+        if (nextCell.entityOcupating == null) return false;
 
         if (nextCell.entityOcupating is ICollectable)
         {
-            nextCell.entityOcupating.GetComponent<ICollectable>().Collect(_snakeSettings.CurrentHead.Prev);
+            nextCell.entityOcupating.GetComponent<ICollectable>().Collect(_snakeInGameSettings.CurrentHead);
         }
 
         else if (nextCell.entityOcupating.typeOfEntity == Entity.TypeOfEntity.Player)
         {
-            _snakeSettings.CurrentHead.GetComponentInParent<Snake>().Die();
+            Debug.Log("NextCell Is Player");
+            if (_snakeInGameSettings.BatteringRam > 0)
+            {
+                Snake enemySnake = nextCell.entityOcupating.GetComponentInParent<Snake>();
+                SnakeBlock enemySnakeBlock = nextCell.entityOcupating.GetComponent<SnakeBlock>();
+                if (enemySnakeBlock.IsHead)
+                {
+                    enemySnake.Die();
+                }
+                else
+                {
+                    enemySnakeBlock.gameObject.SetActive(false);
+                    enemySnake.CutInThisBlock((SnakeBlock)nextCell.entityOcupating);
+                }
+                _snakeInGameSettings.CurrentHead.GetComponentInParent<BatteringRamPowerUpController>().RemovingBatteringRamPowerUp();
+            }
+            else
+            {
+                _snakeInGameSettings.CurrentHead.GetComponentInParent<Snake>().Die();
+                return true;
+            }
         }
-    }
-
-    private void SetPosition(Entity entity, int x, int y)
-    {
-        SnakePart lastPart = _snakeSettings.CurrentHead.Prev;
-
-        lastPart.currentGridCell = _gridInfo.GetGridCellByCoordinate(x, y);
-        lastPart.transform.position = new Vector3(lastPart.currentGridCell.coordinate.x, lastPart.currentGridCell.coordinate.y, 0);
-
-        _snakeSettings.CurrentHead.IsHead = false;
-        _snakeSettings.CurrentHead = lastPart;
-        lastPart.IsHead = true;
+        return false;
     }
 }

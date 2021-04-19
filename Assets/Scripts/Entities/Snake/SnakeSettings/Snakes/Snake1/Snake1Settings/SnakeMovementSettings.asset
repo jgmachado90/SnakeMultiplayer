@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518f17c55be93fe4fa5351ff1b059fb2, type: 3}
+  m_Name: SnakeMovementSettings
+  m_EditorClassIdentifier: 
+  _movementsPerSecond: {fileID: 11400000, guid: 7f005ac2be811c74e8b5974d7485abcb, type: 2}
+  _startX: {fileID: 11400000, guid: 99379c9ef26da444596375431da73b14, type: 2}
+  _startY: {fileID: 11400000, guid: f76152ebfb5fe724ebd946bd4c81993a, type: 2}
+  _speedDebuff: {fileID: 11400000, guid: 09fc0d72008ec234782484a29876499d, type: 2}
+  _speedBuff: {fileID: 11400000, guid: e4b4822062a8e564f80c08a7a8433a65, type: 2}
+  _snakeMaxSpeed: {fileID: 11400000, guid: 2d54af2769c059c48982adce295ddc69, type: 2}

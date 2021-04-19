@@ -12,56 +12,60 @@ public class Snake : MonoBehaviour
     
 
     [Header("Grid")]
-    [SerializeField] private GridInfo _gridInfo;
+    [SerializeField] private GridManager _gridManager;
 
 
     private ISnakeInput _snakeInput;
     private SnakeMover _snakeMover;
     private SnakeEater _snakeEater;
 
-    private Coroutine _tickCoroutine;
+    public SnakeBlock _startingHead;
 
-    public SnakePart _startingHead;
+    public bool dead = false;
 
 
     private void Awake()
     {
-        _snakeSettings.Clear();
-        _snakeInput = _snakeSettings.IsAI ? new Player2Input() as ISnakeInput : new ControllerInput();
+        _snakeSettings.SnakeInGameSettings.Clear();
 
-        StartSnake();
+        _snakeInput = _snakeSettings.IsPlayer2 ? new Player2Input() as ISnakeInput : new ControllerInput();
 
-        _snakeMover = new SnakeMover(_snakeInput, _snakeSettings, _gridInfo);
+        //StartSnake();
+
+        _snakeMover = new SnakeMover(_snakeInput, _snakeSettings, _gridManager);
         _snakeEater = new SnakeEater(_snakeSettings);
 
-        _tickCoroutine = StartCoroutine(TickCoroutine());
+        StartCoroutine(TickCoroutine());
     }
 
     public void StartSnake()
     {
         _startingHead.IsHead = true;
-        _startingHead.Prox = _startingHead;
-        _startingHead.Prev = _startingHead;
-        _snakeSettings.CurrentHead = _startingHead;
-        _snakeSettings.Snake.Add(_startingHead);
+        _snakeSettings.SnakeInGameSettings.CurrentHead = _startingHead;
+        _snakeSettings.SnakeInGameSettings.Snake.Add(_startingHead);
+       
+        if (_snakeSettings.SnakeInGameSettings.CurrentHead.currentGridCell == null)
+            _snakeSettings.SnakeInGameSettings.CurrentHead.currentGridCell = _gridManager.GetGridCellByCoordinate(_snakeSettings.SnakeMovementSettings.StartX.Value, _snakeSettings.SnakeMovementSettings.StartY.Value);
+
     }
 
     IEnumerator TickCoroutine()
     {
+        GridCell newSnakeBlockPosition = null;// = new GridCell();
         while (true)
         {
             float snakeMovementsPerSec = _snakeEater.GetSnakeCurrentSpeed();
             yield return new WaitForSeconds(snakeMovementsPerSec);
 
-            if(_snakeSettings.CurrentHead.currentGridCell == null)
-                _snakeSettings.CurrentHead.currentGridCell = _gridInfo.GetGridCellByCoordinate(_snakeSettings.StartX.Value, _snakeSettings.StartY.Value);
+            bool willGrow = _snakeEater.HasFoodInTheLastPosition();
+            if(willGrow)
+             newSnakeBlockPosition = _snakeSettings.SnakeInGameSettings.Snake.Last().currentGridCell;
 
-            _snakeMover.Tick();
+             _snakeMover.Tick();
 
-            GridCell gridCellToGrow = _snakeEater.GetFoodGridCellInTheLastTailPosition();
 
-            if (gridCellToGrow != null)
-                Grow(gridCellToGrow, _snakeSettings.TailPrefab);
+            if (willGrow)
+                Grow(newSnakeBlockPosition);
 
            
         }
@@ -70,72 +74,79 @@ public class Snake : MonoBehaviour
     private void Update()
     {
         _snakeInput.ReadInput();
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Die();
+        }
     }
 
     internal void Die()
     {
-        //ReloadThisSnake();
-        GetComponent<TimeTravelPowerUpController>().ActivatePowerUp();
+        ReloadThisSnake();
     }
 
     private void ReloadThisSnake()
     {
-        foreach(SnakePart parts in _snakeSettings.Snake)
+        foreach (SnakeBlock parts in _snakeSettings.SnakeInGameSettings.Snake)
         {
-            if (parts.IsHead)
-            {
-                _snakeSettings.CurrentHead.currentGridCell = _gridInfo.GetGridCellByCoordinate(_snakeSettings.StartX.Value, _snakeSettings.StartY.Value);
-            }
-            Destroy(parts.gameObject);
+                Destroy(parts.gameObject);
         }
 
+        _snakeSettings.SnakeInGameSettings.Snake.Clear();
+        _snakeEater._nextTailParts.Clear();
+        _snakeSettings.SnakeInGameSettings.Clear(); 
+
+
+        GameObject newSnakeGO = Instantiate(_snakeSettings.SnakePrefabSettings.TailPrefab, transform);
+        SnakeBlock newSnake = newSnakeGO.GetComponent<SnakeBlock>();
+
+        _startingHead = newSnake;
+
+        StartSnake();
     }
 
-    public void Feed(GridCell currentGridCell, Entity collector)
+    public void Feed(Entity collector, CollectableType collectedType)
     {
-        _snakeEater.AddGrowCoordinate(currentGridCell.coordinate, collector);
+        _snakeEater._nextTailParts.Add(collectedType);
+        SnakeBlock collectorSnakeBlock = (SnakeBlock)collector;
+        collectorSnakeBlock.HasFood = true;
     }
 
-    public void Grow(GridCell newTailGridCell, GameObject tailPrefab)
+    public void Grow(GridCell newBlockPosition)
     {
+        GameObject tailPrefab = _snakeSettings.SnakePrefabSettings.TailPrefab;
         GameObject newTailGO = Instantiate(tailPrefab, transform);
-        SnakePart newTail = newTailGO.GetComponent<SnakePart>();
 
-        SnakePart lastSnakePart = _snakeSettings.CurrentHead.Prev;
-        lastSnakePart.transform.localScale = new Vector3(_snakeSettings.StartScale.Value, _snakeSettings.StartScale.Value, _snakeSettings.StartScale.Value);
-        lastSnakePart.hasFood = false;
+        SnakeBlock newTail = newTailGO.GetComponent<SnakeBlock>();
 
-        newTail.currentGridCell = newTailGridCell;
+        newTail.BlockType = _snakeEater.NextTailPartsPop();
 
-        if (_snakeSettings.CurrentHead.Prox == _snakeSettings.CurrentHead)
-        {
-            _snakeSettings.CurrentHead.Prox = newTail;
-            _snakeSettings.CurrentHead.Prev = newTail;
+        SnakeBlock lastSnakePart = _snakeSettings.SnakeInGameSettings.Snake.Last();
+        lastSnakePart.HasFood = false;
 
-            newTail.Prox = _snakeSettings.CurrentHead;
-            newTail.Prev = _snakeSettings.CurrentHead;
-        }
+        newTail.currentGridCell = newBlockPosition;
 
-        else
-        {
-            SnakePart oldTail = _snakeSettings.CurrentHead.Prev;
-
-            oldTail.Prox = newTail;
-            _snakeSettings.CurrentHead.Prev = newTail;
-
-            newTail.Prev = oldTail;
-            newTail.Prox = _snakeSettings.CurrentHead;
-        
-        }
-
-        _snakeSettings.Snake.Add(newTail);
-
-    
-
+        _snakeSettings.SnakeInGameSettings.Snake.Add(newTail);
     }
 
 
-    
+    internal void CutInThisBlock(SnakeBlock entityOcupating)
+    {
+        int indexToRemove = 0;
+        int i = 0;
+        foreach(SnakeBlock snakeBlock in _snakeSettings.SnakeInGameSettings.Snake)
+        {
+            if(snakeBlock == entityOcupating)
+            {
+                indexToRemove = i;
+       
+            }
+            if(indexToRemove != 0)
+                Destroy(snakeBlock.gameObject);
 
+            i++;
+        }
 
+        _snakeSettings.SnakeInGameSettings.Snake.RemoveRange(indexToRemove, _snakeSettings.SnakeInGameSettings.Snake.Count - indexToRemove);
+    }
 }

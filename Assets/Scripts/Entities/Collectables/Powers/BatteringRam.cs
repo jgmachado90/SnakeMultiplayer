@@ -6,10 +6,16 @@ public class BatteringRam : Entity, ICollectable
 {
     public VoidEvent OnCollectFood;
 
+    public CollectableType CollectableType { get; set; }
+
+    private void Start()
+    {
+        CollectableType = CollectableType.BatteringRam;
+    }
     public void Collect(Entity collector)
     {
-        collector.GetComponentInParent<Snake>().Feed(currentGridCell, collector);
-        collector.GetComponentInParent<BatteringRamPowerUpController>().ActivateBatteringRamPowerUp();
+        collector.GetComponentInParent<Snake>().Feed(collector, CollectableType);
+        collector.GetComponentInParent<BatteringRamPowerUpController>().CollectBatteringRamPowerUp();
         OnCollectFood.Raise();
         Destroy(this.gameObject);
     }

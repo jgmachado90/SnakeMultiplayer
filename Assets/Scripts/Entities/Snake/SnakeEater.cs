@@ -2,40 +2,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SnakeEater
 {
     private readonly SnakeSettings _snakeSettings;
+    public List<CollectableType> _nextTailParts = new List<CollectableType>();
 
     public SnakeEater(SnakeSettings snakeSettings)
     {
         _snakeSettings = snakeSettings;
     }
 
-    public GridCell GetFoodGridCellInTheLastTailPosition()
+    public bool HasFoodInTheLastPosition()
     {
-        SnakePart currentTail = _snakeSettings.CurrentHead.Prev;
-        if (currentTail.hasFood)
-        {
-            return currentTail.currentGridCell;
-        }
-        return null;
+        return _snakeSettings.SnakeInGameSettings.Snake.Last().HasFood;
     }
 
     public float GetSnakeCurrentSpeed()
     {
-        float speedDebuff = _snakeSettings.SpeedDebuff.Value * GetLoadedCount();
-        float speedBuff = _snakeSettings.SpeedBuff.Value;
-        float finalSpeed = _snakeSettings.MovementsPerSecond.Value + speedDebuff - speedBuff;
-        return finalSpeed > 0 ? finalSpeed : _snakeSettings.SnakeMaxSpeed.Value;
+        float speedDebuff = _snakeSettings.SnakeMovementSettings.SpeedDebuff.Value * GetLoadedCount();
+        float speedBuff = _snakeSettings.SnakeMovementSettings.SpeedBuff.Value;
+        float finalSpeed = _snakeSettings.SnakeMovementSettings.MovementsPerSecond.Value + speedDebuff - speedBuff;
+        return finalSpeed > 0 ? finalSpeed : _snakeSettings.SnakeMovementSettings.SnakeMaxSpeed.Value;
     }
 
     private int GetLoadedCount()
     {
         int count = 0;
-        foreach(SnakePart snakePart in _snakeSettings.Snake)
+        foreach(SnakeBlock snakePart in _snakeSettings.SnakeInGameSettings.Snake)
         {
-            if (snakePart.hasFood)
+            if (snakePart.HasFood)
             {
                 count++;
             }
@@ -43,14 +40,11 @@ public class SnakeEater
         return count;
     }
 
-    public void AddGrowCoordinate(GridCellCoordinates coordinates, Entity collector)
+    internal CollectableType NextTailPartsPop()
     {
-        SnakePart snakePart = (SnakePart)collector;
-        snakePart.hasFood = true;
-        collector.transform.localScale = new Vector3(_snakeSettings.FeedScale.Value, _snakeSettings.FeedScale.Value, _snakeSettings.FeedScale.Value);
+        CollectableType nextTail = _nextTailParts.Last();
+        _nextTailParts.Remove(nextTail);
+        return nextTail;
     }
-
-
-
 }
 

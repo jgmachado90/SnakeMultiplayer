@@ -18,15 +18,9 @@ public class Entity : MonoBehaviour
     public GridCell currentGridCell
     {
         set
-        {
-            if (value == null) return;
-            if(_currentGridCell != null)
-            {
-                if(currentGridCell.entityOcupating == this)
-                    _currentGridCell.RemoveEntityFromThisCell();
-            }
+        {  
+            value.SetEntityInThisCell(this);
             _currentGridCell = value;
-            _currentGridCell.SetEntityInThisCell(this);
         }
         get
         {

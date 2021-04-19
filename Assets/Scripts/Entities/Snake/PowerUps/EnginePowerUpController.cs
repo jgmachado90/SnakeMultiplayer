@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class EnginePowerUpController : MonoBehaviour
 {
-    [SerializeField] private SnakeSettings _snakeSettings;
+    [SerializeField] private SnakeMovementSettings _snakeMovementSettings;
     [SerializeField] private FloatVariable _snakeBuff;
 
     private void Start()
     {
-        _snakeSettings.SpeedBuff.Value = 0;
+        _snakeMovementSettings.SpeedBuff.Value = 0;
     }
     public void ActivateEnginePowerUp()
     {
-        _snakeSettings.SpeedBuff.Value += _snakeBuff.Value;
+        _snakeMovementSettings.SpeedBuff.Value += _snakeBuff.Value;
     }
 
 }

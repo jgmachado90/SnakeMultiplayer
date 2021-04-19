@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85def9fa4e60e4448bde1b345a1a6eaf, type: 3}
+  m_Name: SnakeAestheticsSettings
+  m_EditorClassIdentifier: 
+  _startScale: {fileID: 11400000, guid: ddd85953cc0fd7f48a03693fb09eb1f2, type: 2}
+  _feedScale: {fileID: 11400000, guid: d48736346ac2d9e468748948c279faf6, type: 2}

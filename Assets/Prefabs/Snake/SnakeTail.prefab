@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: 4ca1b8cf360e22448bdb1710cc9a56d4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64c2bfc0dc3cb4149b7e700ff1219119, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,10 +101,13 @@ MonoBehaviour:
   _isHead: 0
   headSprite: {fileID: 21300000, guid: 64c2bfc0dc3cb4149b7e700ff1219119, type: 3}
   tailSprite: {fileID: 21300000, guid: 4ca1b8cf360e22448bdb1710cc9a56d4, type: 3}
+  engineSprite: {fileID: 21300000, guid: 8ab0a2532eddec141b6396f197c5ab50, type: 3}
+  BatteringRamSprite: {fileID: 21300000, guid: fb6144012c50ede40af8cabd19c46d68, type: 3}
   spriteRenderer: {fileID: 2509476383913175618}
   _batteringRam: {fileID: 8759394980327105164}
   _snakeSettings: {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
-  hasFood: 0
+  _blockType: 0
+  _hasFood: 0
 --- !u!1001 &5844305176814637248
 PrefabInstance:
   m_ObjectHideFlags: 0
