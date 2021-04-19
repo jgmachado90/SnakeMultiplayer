@@ -4,32 +4,34 @@ using UnityEngine;
 
 public class BatteringRamPowerUpController : MonoBehaviour
 {
-    [SerializeField] private SnakeInGameSettings _snakeInGameSettings;
+    [SerializeField] private int _batteringRam;
+    [SerializeField] private Snake _snake;
+    public int BatteringRam { get { return _batteringRam; } set { _batteringRam = value; } }
+
     public void CollectBatteringRamPowerUp()
     {
-        _snakeInGameSettings.BatteringRam += 1;
-        
-        _snakeInGameSettings.CurrentHead.BatteringRam.gameObject.SetActive(true);
+        BatteringRam += 1;
+
+        _snake.CurrentHead.BatteringRam.gameObject.SetActive(true);
     }
     public void RemovingBatteringRamPowerUp()
     {
-        if (_snakeInGameSettings.BatteringRam > 0)
+        if (BatteringRam > 0)
         {
-            List<SnakeBlock> snake = _snakeInGameSettings.Snake;
+            List<SnakeBlock> snake = _snake.ThisSnake;
             foreach(SnakeBlock snakeBlock in snake)
             {
                 if(snakeBlock.BlockType == CollectableType.BatteringRam)
                 {
                     snakeBlock.BlockType = CollectableType.Food;
-                    _snakeInGameSettings.BatteringRam -= 1;
-                    if (_snakeInGameSettings.BatteringRam == 0)
-                        _snakeInGameSettings.CurrentHead.BatteringRam.gameObject.SetActive(false);
+                    BatteringRam -= 1;
+                    if (BatteringRam == 0)
+                        _snake.CurrentHead.BatteringRam.gameObject.SetActive(false);
                   
                     break;
                 }
             }
         }
-           
     }
 
 

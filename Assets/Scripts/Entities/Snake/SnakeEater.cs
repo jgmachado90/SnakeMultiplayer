@@ -7,16 +7,18 @@ using System.Linq;
 public class SnakeEater
 {
     private readonly SnakeSettings _snakeSettings;
+    private readonly Snake _snake;
     public List<CollectableType> _nextTailParts = new List<CollectableType>();
 
-    public SnakeEater(SnakeSettings snakeSettings)
+    public SnakeEater(SnakeSettings snakeSettings, Snake snake)
     {
         _snakeSettings = snakeSettings;
+        _snake = snake;
     }
 
     public bool HasFoodInTheLastPosition()
     {
-        return _snakeSettings.SnakeInGameSettings.Snake.Last().HasFood;
+        return _snake.ThisSnake.Last().HasFood;
     }
 
     public float GetSnakeCurrentSpeed()
@@ -30,7 +32,7 @@ public class SnakeEater
     private int GetLoadedCount()
     {
         int count = 0;
-        foreach(SnakeBlock snakePart in _snakeSettings.SnakeInGameSettings.Snake)
+        foreach(SnakeBlock snakePart in _snake.ThisSnake)
         {
             if (snakePart.HasFood)
             {

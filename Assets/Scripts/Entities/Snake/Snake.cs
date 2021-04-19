@@ -7,9 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class Snake : MonoBehaviour
 {
+    [Header("SnakeInstanceVariables")]
+    [SerializeField] private int _snakeIndex;
+    public int Snakeindex { get { return _snakeIndex; } set { _snakeIndex = value; } }
+   
+    [SerializeField] private SnakeBlock _currentHead;
+    public SnakeBlock CurrentHead { get { return _currentHead; } set { _currentHead = value; } }
+
+    [SerializeField] private List<SnakeBlock> _snake;
+    public List<SnakeBlock> ThisSnake { get { return _snake; }set { _snake = value; } }
+
+
     [Header("Snake")]
     [SerializeField] private SnakeSettings _snakeSettings;
-    
 
     [Header("Grid")]
     [SerializeField] private GridManager _gridManager;
@@ -19,39 +29,34 @@ public class Snake : MonoBehaviour
     private SnakeMover _snakeMover;
     private SnakeEater _snakeEater;
 
-    public SnakeBlock _startingHead;
-
+    
     public bool dead = false;
 
 
     private void Awake()
     {
-        _snakeSettings.SnakeInGameSettings.Clear();
-
         _snakeInput = _snakeSettings.IsPlayer2 ? new Player2Input() as ISnakeInput : new ControllerInput();
 
-        //StartSnake();
-
-        _snakeMover = new SnakeMover(_snakeInput, _snakeSettings, _gridManager);
-        _snakeEater = new SnakeEater(_snakeSettings);
+        _snakeMover = new SnakeMover(_snakeInput, _gridManager, this);
+        _snakeEater = new SnakeEater(_snakeSettings, this);
 
         StartCoroutine(TickCoroutine());
     }
 
     public void StartSnake()
     {
-        _startingHead.IsHead = true;
-        _snakeSettings.SnakeInGameSettings.CurrentHead = _startingHead;
-        _snakeSettings.SnakeInGameSettings.Snake.Add(_startingHead);
+        CurrentHead.IsHead = true;
+        ThisSnake.Clear();
+        ThisSnake.Add(CurrentHead);
        
-        if (_snakeSettings.SnakeInGameSettings.CurrentHead.currentGridCell == null)
-            _snakeSettings.SnakeInGameSettings.CurrentHead.currentGridCell = _gridManager.GetGridCellByCoordinate(_snakeSettings.SnakeMovementSettings.StartX.Value, _snakeSettings.SnakeMovementSettings.StartY.Value);
+        if (CurrentHead.currentGridCell == null)
+            CurrentHead.currentGridCell = _gridManager.GetGridCellByCoordinate(_snakeSettings.SnakeMovementSettings.StartX.Value, _snakeSettings.SnakeMovementSettings.StartY.Value);
 
     }
 
     IEnumerator TickCoroutine()
     {
-        GridCell newSnakeBlockPosition = null;// = new GridCell();
+        GridCell newSnakeBlockPosition = null;
         while (true)
         {
             float snakeMovementsPerSec = _snakeEater.GetSnakeCurrentSpeed();
@@ -59,7 +64,7 @@ public class Snake : MonoBehaviour
 
             bool willGrow = _snakeEater.HasFoodInTheLastPosition();
             if(willGrow)
-             newSnakeBlockPosition = _snakeSettings.SnakeInGameSettings.Snake.Last().currentGridCell;
+             newSnakeBlockPosition = ThisSnake.Last().currentGridCell;
 
              _snakeMover.Tick();
 
@@ -87,20 +92,17 @@ public class Snake : MonoBehaviour
 
     private void ReloadThisSnake()
     {
-        foreach (SnakeBlock parts in _snakeSettings.SnakeInGameSettings.Snake)
+        foreach (SnakeBlock parts in ThisSnake)
         {
                 Destroy(parts.gameObject);
         }
 
-        _snakeSettings.SnakeInGameSettings.Snake.Clear();
         _snakeEater._nextTailParts.Clear();
-        _snakeSettings.SnakeInGameSettings.Clear(); 
-
 
         GameObject newSnakeGO = Instantiate(_snakeSettings.SnakePrefabSettings.TailPrefab, transform);
         SnakeBlock newSnake = newSnakeGO.GetComponent<SnakeBlock>();
 
-        _startingHead = newSnake;
+        CurrentHead = newSnake;
 
         StartSnake();
     }
@@ -121,12 +123,12 @@ public class Snake : MonoBehaviour
 
         newTail.BlockType = _snakeEater.NextTailPartsPop();
 
-        SnakeBlock lastSnakePart = _snakeSettings.SnakeInGameSettings.Snake.Last();
+        SnakeBlock lastSnakePart = ThisSnake.Last();
         lastSnakePart.HasFood = false;
 
         newTail.currentGridCell = newBlockPosition;
 
-        _snakeSettings.SnakeInGameSettings.Snake.Add(newTail);
+        ThisSnake.Add(newTail);
     }
 
 
@@ -134,7 +136,7 @@ public class Snake : MonoBehaviour
     {
         int indexToRemove = 0;
         int i = 0;
-        foreach(SnakeBlock snakeBlock in _snakeSettings.SnakeInGameSettings.Snake)
+        foreach(SnakeBlock snakeBlock in ThisSnake)
         {
             if(snakeBlock == entityOcupating)
             {
@@ -147,6 +149,6 @@ public class Snake : MonoBehaviour
             i++;
         }
 
-        _snakeSettings.SnakeInGameSettings.Snake.RemoveRange(indexToRemove, _snakeSettings.SnakeInGameSettings.Snake.Count - indexToRemove);
+        ThisSnake.RemoveRange(indexToRemove, ThisSnake.Count - indexToRemove);
     }
 }

@@ -47,9 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f714ce54e8c78419156291e60f1855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _snakeIndex: 0
+  _currentHead: {fileID: 2316877584887877882}
+  _snake: []
   _snakeSettings: {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
   _gridManager: {fileID: 11400000, guid: 9fbad54f33e90b441b2af6f228f9b715, type: 2}
-  _startingHead: {fileID: 2316877584887877882}
+  dead: 0
 --- !u!114 &1213772438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d91161710879e24aafb9dccac523ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _snakeInGameSettings: {fileID: 11400000, guid: 65cdd026258a4cb459e9d8e7c6d1b774, type: 2}
+  _batteringRam: 0
+  _snake: {fileID: 6716359584110770925}
 --- !u!114 &1359877826
 MonoBehaviour:
   m_ObjectHideFlags: 0
