@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 410ec30b33c757445a947cfd2459793d, type: 3}
   m_Name: Snake1StartX
   m_EditorClassIdentifier: 
-  Value: 0
+  Value: 10

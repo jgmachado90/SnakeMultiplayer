@@ -4,10 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Grid/Manager", fileName = "GridManager")]
 public class GridManager : ScriptableObject
 {
-    [SerializeField] private GridSettings _gridSettings;
+    [SerializeField] public GridSettings _gridSettings;
 
     public List<GridCell> _gridCells = new List<GridCell>();
     public List<GridCell> _emptyCells = new List<GridCell>();
+
+    public int lastY;
+    public int sideX;
 
     public void AddCellInEmptyList(GridCell gridCell)
     {
@@ -49,6 +52,42 @@ public class GridManager : ScriptableObject
 
 
         return _emptyCells[indexRNG];
+    }
+
+    public GridCell GetFarFromEntitiesGridCell()
+    {
+        List<Entity> snakeHeads = GetEverySnake();
+        if (snakeHeads.Count == 0)
+        {
+            sideX = 1;
+            lastY = 0;
+            return GetGridCellByCoordinate(3, 0);
+        }
+        int x = 0;
+        int y = ++lastY;
+
+        sideX *= -1;
+        if (sideX > 0)
+            x = 3;
+        if(sideX < 0)
+            x = _gridSettings.LengthX.Value - 3;
+
+        return GetGridCellByCoordinate(x, y);
+    }
+
+    private List<Entity> GetEverySnake()
+    {
+        List<Entity> entities = GetEntities();
+        List<Entity> snakeHeads = new List<Entity>();
+        foreach (Entity entity in entities)
+        {
+            SnakeBlock snakeBlock = entity.GetComponent<SnakeBlock>();
+            if (snakeBlock != null && snakeBlock.IsHead)
+            {
+                snakeHeads.Add(entity);
+            }
+        }
+        return snakeHeads;
     }
 
     public List<Entity> GetEntities()
