@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a54fa37457aba6478c3c9db389d7ea3, type: 3}
   m_Name: SnakePrefabsSettings
   m_EditorClassIdentifier: 
-  _snakePrefab: {fileID: 6716359584110770931, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
+  _snakePrefab:
+  - {fileID: 6716359584110770931, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}
   _tailPrefab: {fileID: 2509476383913175623, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}

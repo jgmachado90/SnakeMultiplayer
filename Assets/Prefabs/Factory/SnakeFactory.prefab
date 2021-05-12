@@ -43,4 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4cb36a5abde2249b6c7a6377b8df88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakePrefabs: {fileID: 11400000, guid: 682bf1ff57367b442a9f78a051cb910c, type: 2}
+  snakesPrefabs: {fileID: 11400000, guid: 682bf1ff57367b442a9f78a051cb910c, type: 2}
+  snakesSettings:
+  - {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
+  - {fileID: 11400000, guid: 050cd4274ec0aeb49837b8bf3670b701, type: 2}
+  - {fileID: 11400000, guid: e4c8a19d6dc839b4e90f44304faedadb, type: 2}
+  lastSnakeIndex: 0

@@ -16,8 +16,6 @@ public class SnakeSettings : ScriptableObject
     [SerializeField] private CollectableType _secondBlock;
     [SerializeField] private CollectableType _thirdBlock;
                 
-    [SerializeField] private bool _isPlayer2;
-
     public SnakeMovementSettings SnakeMovementSettings { get { return _snakeMovementSettings; } }
     public SnakeAestheticsSettings SnakeAestheticsSettings { get { return _snakeAestheticsSettings; } }
     public SnakeInGameSettings SnakeInGameSettings { get { return _snakeInGameSettings; } }
@@ -27,6 +25,5 @@ public class SnakeSettings : ScriptableObject
     public CollectableType SecondBlock { get { return _secondBlock; } }
     public CollectableType ThirdBlock { get { return _thirdBlock; } }
 
-    public bool IsPlayer2 { get { return _isPlayer2; } }
 
 }

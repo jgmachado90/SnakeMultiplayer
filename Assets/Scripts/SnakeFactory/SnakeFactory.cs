@@ -4,26 +4,44 @@ using UnityEngine;
 
 public class SnakeFactory : MonoBehaviour
 {
-    [SerializeField] SnakePrefabsSettings snakePrefabs;
+    [SerializeField] SnakePrefabsSettings snakesPrefabs;
+    [SerializeField] List<SnakeStartingBlocks> snakeStartingBlocks;
 
-
-    private void Update()
+    SnakeInitializer lastSnakeCreated;
+    private int currentSnakeStartingBlocksIndex;
+    private void Awake()
     {
-     
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Debug.Log("starting New Snake");
-            InstantiateNewSnake(KeyCode.A, KeyCode.D);
-
-        }
+        currentSnakeStartingBlocksIndex = 0;
     }
 
-    public void InstantiateNewSnake(KeyCode keyLeft, KeyCode KeyRight)
+    public void InstantiateNewSnake()
     {
-        GameObject newSnakeGameObject = Instantiate(snakePrefabs.SnakePrefab);
-        Snake newSnake = newSnakeGameObject.GetComponent<Snake>();
-
-        newSnake.StartSnake(keyLeft, KeyRight);
-        
+        GameObject newSnakeGameObject = Instantiate(snakesPrefabs.SnakePrefab[0]);
+        SnakeInitializer snakeInitializer = newSnakeGameObject.GetComponent<SnakeInitializer>();
+        snakeInitializer.InitializeSnake(snakeStartingBlocks[currentSnakeStartingBlocksIndex]);
+        lastSnakeCreated = snakeInitializer;
     }
+
+    public void ChangeSnakePrefab()
+    {
+        if (currentSnakeStartingBlocksIndex < snakeStartingBlocks.Count - 1)
+            currentSnakeStartingBlocksIndex++;
+        else
+            currentSnakeStartingBlocksIndex = 0;
+
+        lastSnakeCreated.ChangeSnake(snakeStartingBlocks[currentSnakeStartingBlocksIndex]);
+    }
+
+    public void AssignLastSnakeInputKeys(KeyCode keyLeft, KeyCode keyRight)
+    {
+        lastSnakeCreated.AssignInputKeys(keyLeft, keyRight);
+    }
+
+
+    public void PrepareToReceiveNewSnake()
+    {
+        lastSnakeCreated = null;
+        currentSnakeStartingBlocksIndex = 0;
+    }
+
 }

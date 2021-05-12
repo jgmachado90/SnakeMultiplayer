@@ -18,14 +18,18 @@ public class Snake : MonoBehaviour
     [SerializeField] private bool _canMove;
     public bool CanMove { get { return _canMove; } set { _canMove = value; } }
 
-    public int startingX;
-    public int startingY;
+    private int _startingX;
+    public int StartingX { get { return _startingX; } set { _startingX = value; } }
+    
+    private int _startingY;
+    public int StartingY { get { return _startingY; } set { _startingY = value; } }
 
     public Color snakeColor;
 
 
     [Header("Snake")]
     [SerializeField] private SnakeSettings _snakeSettings;
+    public SnakeSettings SnakeSettings { set { _snakeSettings = value; } }
 
     [Header("Grid")]
     [SerializeField] private GridManager _gridManager;
@@ -41,9 +45,6 @@ public class Snake : MonoBehaviour
 
     private void Awake()
     {
-        startingX = -1;
-        startingY = -1;
-
         _canMove = false;
         _snakeInput = new ControllerInput();
         _snakeMover = new SnakeMover(_snakeInput, _gridManager, this);
@@ -55,53 +56,21 @@ public class Snake : MonoBehaviour
         StartCoroutine(TickCoroutine());
     }
 
-    public void StartSnake(KeyCode keyLeft, KeyCode keyRight)
+    public void SetStartPosition(int x, int y)
     {
-        CurrentHead.IsHead = true;
+        StartingX = x;
+        StartingY = y;
+    }
 
-        ThisSnake.Clear();
-        ThisSnake.Add(CurrentHead);
+    public void RestartSnake()
+    {
+        //To do
+    }
 
-        if (CurrentHead.currentGridCell == null && startingX < 0 && startingY < 0)
-        {
-            GridCell newStartingCell = _gridManager.GetFarFromEntitiesGridCell();
-
-            newStartingCell = _gridManager.GetGridCellByCoordinate(newStartingCell.coordinate.x, newStartingCell.coordinate.y);
-
-            startingX = newStartingCell.coordinate.x;
-            startingY = newStartingCell.coordinate.x;
-        }
-        else
-        {
-            CanMove = true;
-        }
-
-        PlaceSnakeOnGrid(_gridManager.GetGridCellByCoordinate(startingX, startingY));
-
+    public void AssignSnakeInput(KeyCode keyLeft, KeyCode keyRight)
+    {
         _snakeInput.LeftKey = keyLeft;
         _snakeInput.RightKey = keyRight;
-    }
-
-    private void PlaceSnakeOnGrid(GridCell newStartingCell)
-    {
-        CurrentHead.currentGridCell = newStartingCell;
-        GenerateNewSnakePart(newStartingCell.coordinate.x - 1, newStartingCell.coordinate.y, _snakeSettings.FirstBlock);
-        GenerateNewSnakePart(newStartingCell.coordinate.x - 2, newStartingCell.coordinate.y, _snakeSettings.SecondBlock);
-        GenerateNewSnakePart(newStartingCell.coordinate.x - 3, newStartingCell.coordinate.y, _snakeSettings.ThirdBlock);
-    }
-
-    private void GenerateNewSnakePart(int x, int y, CollectableType block)
-    {
-        GameObject tailPrefab = _snakeSettings.SnakePrefabSettings.TailPrefab;
-        GameObject newTailGO = Instantiate(tailPrefab, transform);
-
-        SnakeBlock newTail = newTailGO.GetComponent<SnakeBlock>();
-
-        newTail.BlockType = block;
-
-        newTail.currentGridCell = _gridManager.GetGridCellByCoordinate(x, y);
-
-        ThisSnake.Add(newTail);
     }
 
     IEnumerator TickCoroutine()
@@ -137,10 +106,6 @@ public class Snake : MonoBehaviour
             _canMove = true;
         }
         _snakeInput.ReadInput();
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Die();
-        }
     }
 
     internal void Die()
@@ -162,7 +127,7 @@ public class Snake : MonoBehaviour
 
         CurrentHead = newSnake;
 
-        StartSnake(_snakeInput.LeftKey, _snakeInput.RightKey);
+        RestartSnake();
     }
 
     public void Feed(Entity collector, CollectableType collectedType)

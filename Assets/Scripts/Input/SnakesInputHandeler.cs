@@ -5,6 +5,7 @@ using System;
 
 public class SnakesInputHandeler : MonoBehaviour
 {
+
     public SnakeFactory snakeFactory;
 
     public InputHandeler inputHandeler;
@@ -13,9 +14,11 @@ public class SnakesInputHandeler : MonoBehaviour
 
     private Tuple<KeyCode, KeyCode> _currentInputKeys;
 
-   
+
 
     float time;
+    private float currentTimeToAssignNewPlayer;
+    private float firstTimeToAssignNewPlayer;
     public float timePressedToAssignNewPlayer;
 
     private void Start()
@@ -26,49 +29,55 @@ public class SnakesInputHandeler : MonoBehaviour
     {
         if (inputHandeler.activeInputs.Count == 2 && _currentInputKeys == null)
         {
-            AssignKeys();
+            SetCurrentInputKeys();
+            currentTimeToAssignNewPlayer = Time.time + timePressedToAssignNewPlayer;
+            firstTimeToAssignNewPlayer = Time.time + timePressedToAssignNewPlayer;
             time = Time.time;
         }
-      
+
+        else if (inputHandeler.activeInputs.Count == 2 && _currentInputKeys != null)
+        {
+            if (Time.time >= currentTimeToAssignNewPlayer)
+            {
+                if (IsNewInputKeys())
+                    CreateNewSnake();
+                else
+                    snakeFactory.ChangeSnakePrefab();
+
+                currentTimeToAssignNewPlayer = Time.time + timePressedToAssignNewPlayer;
+            }
+        }
 
         if (inputHandeler.activeInputs.Count < 2 && _currentInputKeys != null)
         {
-            if (Time.time >= time + timePressedToAssignNewPlayer)
+            if (Time.time >= firstTimeToAssignNewPlayer)
             {
-                if (IsNewInputKeys())
-                    CreateNewPlayer();
+                snakeFactory.AssignLastSnakeInputKeys(_currentInputKeys.Item1, _currentInputKeys.Item2);
+                snakeFactory.PrepareToReceiveNewSnake();
+                _currentInputKeys = null;
             }
             else
+            {
                 _currentInputKeys = null;
+            }
         }
     }
 
     private bool IsNewInputKeys()
     {
-        bool isNewPlayer = true;
-        foreach (Tuple<KeyCode, KeyCode> playerKeys in playerInputKeys)
-            isNewPlayer = IsNewPlayerInput(isNewPlayer, playerKeys);
-        return isNewPlayer;
+        if (playerInputKeys.Contains(_currentInputKeys))
+            return false;
+        return true;
     }
 
-    private void CreateNewPlayer()
+    private void CreateNewSnake()
     {
-        snakeFactory.InstantiateNewSnake(_currentInputKeys.Item1, _currentInputKeys.Item2);
+        snakeFactory.InstantiateNewSnake();
         playerInputKeys.Add(_currentInputKeys);
-        _currentInputKeys = null;
+        //_currentInputKeys = null;
     }
 
-    private bool IsNewPlayerInput(bool isNewPlayer, Tuple<KeyCode, KeyCode> playerKeys)
-    {
-        if (_currentInputKeys.Item1 == playerKeys.Item1 && _currentInputKeys.Item2 == playerKeys.Item2)
-        {
-            isNewPlayer = false;
-            _currentInputKeys = null;
-        }
-        return isNewPlayer;
-    }
-
-    private void AssignKeys()
+    private void SetCurrentInputKeys()
     {
         if (_currentInputKeys == null)
         {

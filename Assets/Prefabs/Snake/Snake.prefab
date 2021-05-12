@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6716359584110770925}
   - component: {fileID: 1213772438}
   - component: {fileID: 1359877822}
+  - component: {fileID: 413326000666287378}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -47,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentHead: {fileID: 2316877584887877882}
-  _snake: []
+  _snake:
+  - {fileID: 2316877584887877882}
   _canMove: 0
   _snakeSettings: {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
   _gridManager: {fileID: 11400000, guid: 9fbad54f33e90b441b2af6f228f9b715, type: 2}
@@ -80,6 +82,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _batteringRam: 0
   _snake: {fileID: 6716359584110770925}
+--- !u!114 &413326000666287378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6716359584110770931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc8b552e00a0674ba00adb4c07a2cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snake: {fileID: 6716359584110770925}
+  _snakeSettings: {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
+  _gridManager: {fileID: 11400000, guid: 9fbad54f33e90b441b2af6f228f9b715, type: 2}
 --- !u!1001 &6716359582420670107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,6 +166,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9012404994795046497, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
       propertyPath: isHead
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9012404994795046497, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
+      propertyPath: _isHead
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9012404994795046497, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
