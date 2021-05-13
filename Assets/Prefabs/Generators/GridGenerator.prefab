@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5896730198128607057}
   - component: {fileID: 5896730198128607058}
   m_Layer: 0
-  m_Name: SceneryGenerator
+  m_Name: GridGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gridSettings: {fileID: 11400000, guid: fb2d2b74f42ac4641b45a8378f730510, type: 2}
-  _gridManager: {fileID: 0}
+  _gridManager: {fileID: 11400000, guid: 9fbad54f33e90b441b2af6f228f9b715, type: 2}
   OnCreateGrid: {fileID: 11400000, guid: 631266a263b0c674cbfc250cba7deec2, type: 2}

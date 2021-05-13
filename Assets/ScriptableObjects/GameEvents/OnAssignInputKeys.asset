@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85def9fa4e60e4448bde1b345a1a6eaf, type: 3}
-  m_Name: Snake1ScaleSettings
+  m_Script: {fileID: 11500000, guid: 98c719ff0255f1c42853ead77de7c21b, type: 3}
+  m_Name: OnAssignInputKeys
   m_EditorClassIdentifier: 
-  _startScale: {fileID: 11400000, guid: ddd85953cc0fd7f48a03693fb09eb1f2, type: 2}
-  _feededScale: {fileID: 11400000, guid: d48736346ac2d9e468748948c279faf6, type: 2}

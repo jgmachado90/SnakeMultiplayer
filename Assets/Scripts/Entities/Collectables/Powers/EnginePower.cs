@@ -16,7 +16,7 @@ public class EnginePower : Entity, ICollectable
     public void Collect(Entity collector)
     {
         collector.GetComponentInParent<Snake>().Feed(collector, CollectableType);
-        collector.GetComponentInParent<EnginePowerUpController>().ActivateEnginePowerUp();
+        collector.GetComponentInParent<EnginePowerUpController>().CollectPowerUp();
         OnCollectFood.Raise();
         Destroy(this.gameObject);
     }

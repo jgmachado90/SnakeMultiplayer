@@ -50,7 +50,6 @@ public class GridManager : ScriptableObject
 
         int indexRNG = Random.Range(0, emptyCellsCount);
 
-
         return _emptyCells[indexRNG];
     }
 

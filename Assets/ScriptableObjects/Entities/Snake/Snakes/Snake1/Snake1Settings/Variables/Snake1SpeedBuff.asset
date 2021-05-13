@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6a40595e043154ebf3491b7d8247fc, type: 3}
   m_Name: Snake1SpeedBuff
   m_EditorClassIdentifier: 
-  Value: 0
+  Value: 0.01

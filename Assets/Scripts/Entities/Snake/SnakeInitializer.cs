@@ -11,6 +11,8 @@ public class SnakeInitializer : MonoBehaviour
     private SnakeStartingBlocks _snakeStartingBlocks;
     private Color _snakeColor;
 
+    public SnakeStartingBlocks SnakeStartingBlocks { get { return _snakeStartingBlocks; } }
+
     public GridManager _gridManager;
 
     private void Awake()
@@ -64,8 +66,27 @@ public class SnakeInitializer : MonoBehaviour
         GameObject newTailGO = Instantiate(tailPrefab, transform);
         SnakeBlock newTail = newTailGO.GetComponent<SnakeBlock>();
         newTail.BlockType = block;
+        ActivateBlockPower(block);
         newTail.currentGridCell = _gridManager.GetGridCellByCoordinate(x, y);
         snake.ThisSnake.Add(newTail);
+    }
+
+    private void ActivateBlockPower(CollectableType block)
+    {
+        if(block == CollectableType.BatteringRam)
+            GetComponent<BatteringRamPowerUpController>().CollectPowerUp();
+
+        else if(block == CollectableType.EnginePower)
+            GetComponent<EnginePowerUpController>().CollectPowerUp();
+    }
+
+    private void DeactivateBlockPower(CollectableType block)
+    {
+        if (block == CollectableType.BatteringRam)
+            GetComponent<BatteringRamPowerUpController>().ClearPowerUp();
+
+        else if (block == CollectableType.EnginePower)
+            GetComponent<EnginePowerUpController>().ClearPowerUp();
     }
 
     public void ChangeSnake(SnakeStartingBlocks newSnakeStartingBlocks)
@@ -83,7 +104,10 @@ public class SnakeInitializer : MonoBehaviour
         foreach (SnakeBlock snakeBlock in snake.ThisSnake)
         {
             if (!snakeBlock.IsHead)
+            {
                 Destroy(snakeBlock.gameObject);
+                DeactivateBlockPower(snakeBlock.BlockType);
+            }
             else
                 head = snakeBlock;
         }

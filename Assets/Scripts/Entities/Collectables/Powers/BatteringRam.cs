@@ -15,7 +15,7 @@ public class BatteringRam : Entity, ICollectable
     public void Collect(Entity collector)
     {
         collector.GetComponentInParent<Snake>().Feed(collector, CollectableType);
-        collector.GetComponentInParent<BatteringRamPowerUpController>().CollectBatteringRamPowerUp();
+        collector.GetComponentInParent<BatteringRamPowerUpController>().CollectPowerUp();
         OnCollectFood.Raise();
         Destroy(this.gameObject);
     }

@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BatteringRamPowerUpController : MonoBehaviour
+public class BatteringRamPowerUpController : PowerUpController
 {
-    [SerializeField] private int _batteringRam;
     [SerializeField] private Snake _snake;
-    public int BatteringRam { get { return _batteringRam; } set { _batteringRam = value; } }
 
-    public void CollectBatteringRamPowerUp()
+    public override void CollectPowerUp()
     {
-        BatteringRam += 1;
-
+        base.CollectPowerUp();
         _snake.CurrentHead.BatteringRam.gameObject.SetActive(true);
     }
+
+
     public void RemovingBatteringRamPowerUp()
     {
-        if (BatteringRam > 0)
+        if (BlockQuantity > 0)
         {
             List<SnakeBlock> snake = _snake.ThisSnake;
             foreach(SnakeBlock snakeBlock in snake)
@@ -24,14 +23,20 @@ public class BatteringRamPowerUpController : MonoBehaviour
                 if(snakeBlock.BlockType == CollectableType.BatteringRam)
                 {
                     snakeBlock.BlockType = CollectableType.Food;
-                    BatteringRam -= 1;
-                    if (BatteringRam == 0)
+                    SpentPowerUp(1);
+                    if (BlockQuantity == 0)
                         _snake.CurrentHead.BatteringRam.gameObject.SetActive(false);
                   
                     break;
                 }
             }
         }
+    }
+
+    public override void ClearPowerUp()
+    {
+        base.ClearPowerUp();
+        _snake.CurrentHead.BatteringRam.gameObject.SetActive(false);
     }
 
 

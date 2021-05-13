@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _snakeMovementSettings: {fileID: 11400000, guid: 1d0bc318835364c458df6aa371fd97e9, type: 2}
-  _snakeBuff: {fileID: 11400000, guid: 239963a259615e546a1f80353ba3d1f8, type: 2}
+  _snakeBuff: 0.01
 --- !u!114 &1359877822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ PrefabInstance:
     - target: {fileID: 9012404994795046497, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
       propertyPath: _entityInfo
       value: 
-      objectReference: {fileID: 11400000, guid: a461e1d4903835844871affda6a5ac77, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 9012404994795046497, guid: 57829b7ae3a15914aa1d2f0e8ec3e280, type: 3}
       propertyPath: _snakeSettings
       value: 

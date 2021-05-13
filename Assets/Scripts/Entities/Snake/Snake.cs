@@ -81,6 +81,7 @@ public class Snake : MonoBehaviour
                 _snakeMover.Tick();
 
 
+
                 if (willGrow)
                     Grow(newSnakeBlockPosition);
             }
@@ -106,19 +107,12 @@ public class Snake : MonoBehaviour
 
     private void ReloadThisSnake()
     {
-        foreach (SnakeBlock parts in ThisSnake)
-        {
-                Destroy(parts.gameObject);
-        }
+        SnakeInitializer snakeInitializer = GetComponent<SnakeInitializer>(); 
+        snakeInitializer.ChangeSnake(snakeInitializer.SnakeStartingBlocks);
 
-        _snakeEater._nextTailParts.Clear();
-
-        GameObject newSnakeGO = Instantiate(_snakeSettings.SnakePrefabSettings.TailPrefab, transform);
-        SnakeBlock newSnake = newSnakeGO.GetComponent<SnakeBlock>();
-
-        CurrentHead = newSnake;
-
-        RestartSnake();
+        _snakeInput.LookingDirection = Direction.Right;
+        _snakeInput.MovingDirection = Direction.Right;
+      
     }
 
     public void Feed(Entity collector, CollectableType collectedType)

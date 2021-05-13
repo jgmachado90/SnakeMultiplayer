@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnginePowerUpController : MonoBehaviour
+public class EnginePowerUpController : PowerUpController
 {
     [SerializeField] private SnakeMovementSettings _snakeMovementSettings;
-    [SerializeField] private FloatVariable _snakeBuff;
+    [SerializeField] private float _snakeBuff;
 
     private void Start()
     {
         _snakeMovementSettings.SpeedBuff.Value = 0;
     }
-    public void ActivateEnginePowerUp()
+    public override void CollectPowerUp()
     {
-        _snakeMovementSettings.SpeedBuff.Value += _snakeBuff.Value;
+        base.CollectPowerUp();
+        _snakeMovementSettings.SpeedBuff.Value += _snakeBuff;
+    }
+
+    public override void ClearPowerUp()
+    {
+        base.ClearPowerUp();
+        _snakeMovementSettings.SpeedBuff.Value = 0;
     }
 
 }

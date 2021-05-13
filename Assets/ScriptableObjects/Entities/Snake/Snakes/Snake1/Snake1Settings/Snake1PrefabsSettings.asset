@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a54fa37457aba6478c3c9db389d7ea3, type: 3}
-  m_Name: SnakePrefabsSettings
+  m_Name: Snake1PrefabsSettings
   m_EditorClassIdentifier: 
   _snakePrefab:
   - {fileID: 6716359584110770931, guid: 6cd4d647c2e49594ba3859d323b8dc07, type: 3}

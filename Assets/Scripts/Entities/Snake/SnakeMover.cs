@@ -72,11 +72,24 @@ public class SnakeMover
         int snakeLength = _snake.ThisSnake.Count - 1;
         List<SnakeBlock> snake = _snake.ThisSnake;
 
+
         for (int i = snakeLength; i > 0; i--)
         {
+            BatteringRamEffect(snakeLength, snake, i);
             snake[i].currentGridCell = snake[i - 1].currentGridCell;
         }
 
+    }
+
+    private static void BatteringRamEffect(int snakeLength, List<SnakeBlock> snake, int i)
+    {
+        if (!snake[i].gameObject.activeSelf && i == snakeLength)
+            snake[i].gameObject.SetActive(true);
+        else if (!snake[i - 1].gameObject.activeSelf)
+        {
+            snake[i - 1].gameObject.SetActive(true);
+            snake[i].gameObject.SetActive(false);
+        }
     }
 
     private void MoveFoodBlock()
@@ -115,20 +128,11 @@ public class SnakeMover
 
         else if (nextCell.entityOcupating.typeOfEntity == Entity.TypeOfEntity.Player)
         {
-            Debug.Log("NextCell Is Player");
-            if (_snake.GetComponent<BatteringRamPowerUpController>().BatteringRam > 0)
+            if (_snake.GetComponent<BatteringRamPowerUpController>().BlockQuantity > 0)
             {
-                Snake enemySnake = nextCell.entityOcupating.GetComponentInParent<Snake>();
                 SnakeBlock enemySnakeBlock = nextCell.entityOcupating.GetComponent<SnakeBlock>();
-                if (enemySnakeBlock.IsHead)
-                {
-                    enemySnake.Die();
-                }
-                else
-                {
-                    enemySnakeBlock.gameObject.SetActive(false);
-                    enemySnake.CutInThisBlock((SnakeBlock)nextCell.entityOcupating);
-                }
+                enemySnakeBlock.gameObject.SetActive(false);
+           
                 _snake.CurrentHead.GetComponentInParent<BatteringRamPowerUpController>().RemovingBatteringRamPowerUp();
             }
             else

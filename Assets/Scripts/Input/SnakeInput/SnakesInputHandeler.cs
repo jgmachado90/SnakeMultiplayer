@@ -5,14 +5,18 @@ using System;
 
 public class SnakesInputHandeler : MonoBehaviour
 {
-
-    public SnakeFactory snakeFactory;
+    [SerializeField] private PlayerInput _currentInput;
+    public PlayerInput CurrentInput { get { return _currentInput; } set { _currentInput = value; } }
 
     public InputHandeler inputHandeler;
 
     public List<Tuple<KeyCode, KeyCode>> playerInputKeys = new List<Tuple<KeyCode, KeyCode>>();
 
-    private Tuple<KeyCode, KeyCode> _currentInputKeys;
+    [SerializeField] private VoidEvent OnInstantiateNewSnake;
+    [SerializeField] private VoidEvent OnChangeSnakePrefab;
+    [SerializeField] private VoidEvent OnAssignInputKeys;
+    [SerializeField] private VoidEvent OnPrepareToReceiveNewSnake;
+
 
 
 
@@ -24,66 +28,74 @@ public class SnakesInputHandeler : MonoBehaviour
     private void Start()
     {
         time = 0;
+
     }
     private void Update()
     {
-        if (inputHandeler.activeInputs.Count == 2 && _currentInputKeys == null)
+        if (inputHandeler.activeInputs.Count == 2 && CurrentInput.MyInput == null)
         {
             SetCurrentInputKeys();
-            currentTimeToAssignNewPlayer = Time.time + timePressedToAssignNewPlayer;
-            firstTimeToAssignNewPlayer = Time.time + timePressedToAssignNewPlayer;
-            time = Time.time;
+            StartPressingTimeCount();
         }
 
-        else if (inputHandeler.activeInputs.Count == 2 && _currentInputKeys != null)
+        else if (inputHandeler.activeInputs.Count == 2 && CurrentInput.MyInput != null)
         {
             if (Time.time >= currentTimeToAssignNewPlayer)
             {
                 if (IsNewInputKeys())
                     CreateNewSnake();
                 else
-                    snakeFactory.ChangeSnakePrefab();
+                    OnChangeSnakePrefab.Raise();
 
                 currentTimeToAssignNewPlayer = Time.time + timePressedToAssignNewPlayer;
             }
         }
 
-        if (inputHandeler.activeInputs.Count < 2 && _currentInputKeys != null)
+        if (inputHandeler.activeInputs.Count < 2 && CurrentInput.MyInput != null)
         {
             if (Time.time >= firstTimeToAssignNewPlayer)
             {
-                snakeFactory.AssignLastSnakeInputKeys(_currentInputKeys.Item1, _currentInputKeys.Item2);
-                snakeFactory.PrepareToReceiveNewSnake();
-                _currentInputKeys = null;
+                OnAssignInputKeys.Raise();
+                OnPrepareToReceiveNewSnake.Raise();
+             // snakeFactory.AssignLastSnakeInputKeys(_currentInputKeys.Item1, _currentInputKeys.Item2);
+             // snakeFactory.PrepareToReceiveNewSnake();
+                CurrentInput.MyInput = null;
             }
             else
             {
-                _currentInputKeys = null;
+                CurrentInput.MyInput = null;
             }
         }
     }
 
+    private void StartPressingTimeCount()
+    {
+        currentTimeToAssignNewPlayer = Time.time + timePressedToAssignNewPlayer;
+        firstTimeToAssignNewPlayer = Time.time + timePressedToAssignNewPlayer;
+        time = Time.time;
+    }
+
     private bool IsNewInputKeys()
     {
-        if (playerInputKeys.Contains(_currentInputKeys))
+        if (playerInputKeys.Contains(CurrentInput.MyInput))
             return false;
         return true;
     }
 
     private void CreateNewSnake()
     {
-        snakeFactory.InstantiateNewSnake();
-        playerInputKeys.Add(_currentInputKeys);
-        //_currentInputKeys = null;
+        OnInstantiateNewSnake.Raise();
+        playerInputKeys.Add(CurrentInput.MyInput);
+   
     }
 
     private void SetCurrentInputKeys()
     {
-        if (_currentInputKeys == null)
+        if (CurrentInput.MyInput == null)
         {
             KeyCode firstKey = inputHandeler.activeInputs[0];
             KeyCode secondKey = inputHandeler.activeInputs[1];
-            _currentInputKeys = new Tuple<KeyCode, KeyCode>(firstKey, secondKey);
+            CurrentInput.MyInput = new Tuple<KeyCode, KeyCode>(firstKey, secondKey);
         }
     }
 }

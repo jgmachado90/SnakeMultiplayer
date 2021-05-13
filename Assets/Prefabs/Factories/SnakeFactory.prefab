@@ -10,6 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2401933829492019913}
   - component: {fileID: 2401933829492019918}
+  - component: {fileID: 3958718439142353609}
+  - component: {fileID: 3817732204828057896}
+  - component: {fileID: 5122158639823145226}
+  - component: {fileID: 5039980785756147140}
   m_Layer: 0
   m_Name: SnakeFactory
   m_TagString: Untagged
@@ -43,9 +47,123 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4cb36a5abde2249b6c7a6377b8df88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnInitializeFirstSnake: {fileID: 11400000, guid: 3416e6db4cbe85b45a5c63803a8b0310, type: 2}
   snakesPrefabs: {fileID: 11400000, guid: 682bf1ff57367b442a9f78a051cb910c, type: 2}
-  snakesSettings:
-  - {fileID: 11400000, guid: 42410d443491ae94ea210535635236ea, type: 2}
-  - {fileID: 11400000, guid: 050cd4274ec0aeb49837b8bf3670b701, type: 2}
-  - {fileID: 11400000, guid: e4c8a19d6dc839b4e90f44304faedadb, type: 2}
-  lastSnakeIndex: 0
+  snakeStartingBlocks:
+  - {fileID: 11400000, guid: e6862a3875c21d44ba31e344e96b3766, type: 2}
+  - {fileID: 11400000, guid: 52ddcc2b44256a048ba6046cc0f31a22, type: 2}
+  - {fileID: 11400000, guid: 5d6fd9b26b352f2489494c4f6c449e97, type: 2}
+  - {fileID: 11400000, guid: 3977a1ca6bf3a46409e60a1d20eb3901, type: 2}
+  _currentInput: {fileID: 11400000, guid: 6294d7a238bd2d74492cd4fb6a7b0dd5, type: 2}
+--- !u!114 &3958718439142353609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2401933829492019912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 7bfeb5ba367959b4ba19d715229398d9, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2401933829492019918}
+        m_TargetAssemblyTypeName: SnakeFactory, Assembly-CSharp
+        m_MethodName: InstantiateNewSnake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3817732204828057896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2401933829492019912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 8f007d1f1c305e44d8c1b87a65f1836e, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2401933829492019918}
+        m_TargetAssemblyTypeName: SnakeFactory, Assembly-CSharp
+        m_MethodName: ChangeSnakePrefab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5122158639823145226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2401933829492019912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 210f9bb10ad69ea45b9d88f20d5175a7, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2401933829492019918}
+        m_TargetAssemblyTypeName: SnakeFactory, Assembly-CSharp
+        m_MethodName: AssignLastSnakeInputKeys
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5039980785756147140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2401933829492019912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 7906a459a36632945a6579002fb036c3, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2401933829492019918}
+        m_TargetAssemblyTypeName: SnakeFactory, Assembly-CSharp
+        m_MethodName: PrepareToReceiveNewSnake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

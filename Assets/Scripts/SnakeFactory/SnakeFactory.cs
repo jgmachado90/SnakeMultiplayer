@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class SnakeFactory : MonoBehaviour
 {
+    [SerializeField] private VoidEvent OnInitializeFirstSnake;
+
     [SerializeField] SnakePrefabsSettings snakesPrefabs;
     [SerializeField] List<SnakeStartingBlocks> snakeStartingBlocks;
 
+    [SerializeField] private PlayerInput _currentInput;
+    public PlayerInput CurrentInput { get { return _currentInput; } }
+
     SnakeInitializer lastSnakeCreated;
     private int currentSnakeStartingBlocksIndex;
+
+    
+
     private void Awake()
     {
         currentSnakeStartingBlocksIndex = 0;
@@ -32,14 +40,15 @@ public class SnakeFactory : MonoBehaviour
         lastSnakeCreated.ChangeSnake(snakeStartingBlocks[currentSnakeStartingBlocksIndex]);
     }
 
-    public void AssignLastSnakeInputKeys(KeyCode keyLeft, KeyCode keyRight)
+    public void AssignLastSnakeInputKeys()
     {
-        lastSnakeCreated.AssignInputKeys(keyLeft, keyRight);
+        lastSnakeCreated.AssignInputKeys(CurrentInput.MyInput.Item1, CurrentInput.MyInput.Item2);
     }
 
 
     public void PrepareToReceiveNewSnake()
     {
+        OnInitializeFirstSnake.Raise();
         lastSnakeCreated = null;
         currentSnakeStartingBlocksIndex = 0;
     }

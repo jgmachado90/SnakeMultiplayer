@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6651430421901421689}
   - component: {fileID: 6651430421901421695}
   - component: {fileID: 6651430421901421694}
+  - component: {fileID: 7304146315829128032}
   m_Layer: 0
   m_Name: InputHandeler
   m_TagString: Untagged
@@ -44,8 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee893dea05c6834786b5bc3c2f4d17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snakeFactory: {fileID: 0}
+  _currentInput: {fileID: 11400000, guid: 6294d7a238bd2d74492cd4fb6a7b0dd5, type: 2}
   inputHandeler: {fileID: 6651430421901421694}
+  OnInstantiateNewSnake: {fileID: 11400000, guid: 7bfeb5ba367959b4ba19d715229398d9, type: 2}
+  OnChangeSnakePrefab: {fileID: 11400000, guid: 8f007d1f1c305e44d8c1b87a65f1836e, type: 2}
+  OnAssignInputKeys: {fileID: 11400000, guid: 210f9bb10ad69ea45b9d88f20d5175a7, type: 2}
+  OnPrepareToReceiveNewSnake: {fileID: 11400000, guid: 7906a459a36632945a6579002fb036c3, type: 2}
   timePressedToAssignNewPlayer: 1
 --- !u!114 &6651430421901421694
 MonoBehaviour:
@@ -60,3 +65,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeInputs: 
+--- !u!114 &7304146315829128032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6651430421901421688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9bcf9f0b73bb94282e4630c895aa4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStartGame: {fileID: 11400000, guid: 71c1696df77fc29408fca64ceb887f70, type: 2}
