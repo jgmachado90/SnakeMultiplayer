@@ -68,7 +68,7 @@ public class SnakeBlock : Entity
         {
             if (value)
             {
-                float scaleValue = _snakeSettings.SnakeAestheticsSettings.FeedScale.Value;
+                float scaleValue = _snakeSettings.SnakeAestheticsSettings.FeededScale.Value;
                 transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
                 _hasFood = value;
             }

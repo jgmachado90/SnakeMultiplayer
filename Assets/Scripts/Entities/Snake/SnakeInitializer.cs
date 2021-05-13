@@ -15,7 +15,7 @@ public class SnakeInitializer : MonoBehaviour
 
     private void Awake()
     {
-        _snakeColor = new Color(
+        snake.SnakeColor = new Color(
             UnityEngine.Random.Range(0f, 1f),
             UnityEngine.Random.Range(0f, 1f),
             UnityEngine.Random.Range(0f, 1f),
@@ -38,7 +38,7 @@ public class SnakeInitializer : MonoBehaviour
     {
         foreach (SnakeBlock snakeBlock in snake.ThisSnake)
         {
-            snakeBlock.GetComponent<SpriteRenderer>().color = _snakeColor;
+            snakeBlock.GetComponent<SpriteRenderer>().color = snake.SnakeColor;
         }
     }
 

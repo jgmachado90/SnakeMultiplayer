@@ -10,9 +10,6 @@ public class Entity : MonoBehaviour
     private TypeOfEntity _typeOfEntity;
     public TypeOfEntity typeOfEntity => _typeOfEntity;
     
-    [SerializeField] private EntityInfo _entityInfo;
-    public EntityInfo EntityInfo {get { return _entityInfo; } }
-
     private GridCell _currentGridCell;
 
     public GridCell currentGridCell

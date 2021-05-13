@@ -10,22 +10,18 @@ public class Snake : MonoBehaviour
     [Header("SnakeInstanceVariables")]
    
     [SerializeField] private SnakeBlock _currentHead;
-    public SnakeBlock CurrentHead { get { return _currentHead; } set { _currentHead = value; } }
-
-    [SerializeField] private List<SnakeBlock> _snake;
-    public List<SnakeBlock> ThisSnake { get { return _snake; }set { _snake = value; } }
-
+    [SerializeField] private List<SnakeBlock> _thisSnake;
     [SerializeField] private bool _canMove;
-    public bool CanMove { get { return _canMove; } set { _canMove = value; } }
-
     private int _startingX;
-    public int StartingX { get { return _startingX; } set { _startingX = value; } }
-    
     private int _startingY;
+    private Color _snakeColor;
+
+    public SnakeBlock CurrentHead { get { return _currentHead; } set { _currentHead = value; } }
+    public List<SnakeBlock> ThisSnake { get { return _thisSnake; } set { _thisSnake = value; } }
+    public bool CanMove { get { return _canMove; } set { _canMove = value; } }
+    public int StartingX { get { return _startingX; } set { _startingX = value; } }
     public int StartingY { get { return _startingY; } set { _startingY = value; } }
-
-    public Color snakeColor;
-
+    public Color SnakeColor { get { return _snakeColor; } set { _snakeColor = value; } }
 
     [Header("Snake")]
     [SerializeField] private SnakeSettings _snakeSettings;
@@ -51,15 +47,15 @@ public class Snake : MonoBehaviour
         _snakeEater = new SnakeEater(_snakeSettings, this);
     }
 
-    private void Start()
-    {
-        StartCoroutine(TickCoroutine());
-    }
-
     public void SetStartPosition(int x, int y)
     {
         StartingX = x;
         StartingY = y;
+    }
+    public void AssignSnakeInput(KeyCode keyLeft, KeyCode keyRight)
+    {
+        _snakeInput.LeftKey = keyLeft;
+        _snakeInput.RightKey = keyRight;
     }
 
     public void RestartSnake()
@@ -67,11 +63,6 @@ public class Snake : MonoBehaviour
         //To do
     }
 
-    public void AssignSnakeInput(KeyCode keyLeft, KeyCode keyRight)
-    {
-        _snakeInput.LeftKey = keyLeft;
-        _snakeInput.RightKey = keyRight;
-    }
 
     IEnumerator TickCoroutine()
     {
@@ -94,17 +85,17 @@ public class Snake : MonoBehaviour
                     Grow(newSnakeBlockPosition);
             }
             yield return null;
-
-
         }
+    }
+
+    public void OnGameStart()
+    {
+        StartCoroutine(TickCoroutine());
+        _canMove = true;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _canMove = true;
-        }
         _snakeInput.ReadInput();
     }
 
@@ -145,7 +136,7 @@ public class Snake : MonoBehaviour
         SnakeBlock newTail = newTailGO.GetComponent<SnakeBlock>();
 
         newTail.BlockType = _snakeEater.NextTailPartsPop();
-
+        newTail.GetComponent<SpriteRenderer>().color = SnakeColor;
         SnakeBlock lastSnakePart = ThisSnake.Last();
         lastSnakePart.HasFood = false;
 
