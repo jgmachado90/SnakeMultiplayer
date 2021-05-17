@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CollectableSettings
   m_EditorClassIdentifier: 
   _timeToSpawnNewCollectable: 1
-  _startingCollectableCount: 3
+  _startingCollectableCount: 1
   _foodPrefab: {fileID: 9158487608503621276, guid: 0cc51c6ecdf0b914482f90ed09fead15, type: 3}
   _enginePowerPrefab: {fileID: 9158487608503621276, guid: fd267640c3bcc154db0ce04460ec0bc1, type: 3}
   _timeTravelPrefab: {fileID: 9158487608503621276, guid: ec7d4d041430c454db7bbbdf97f9ba1e, type: 3}

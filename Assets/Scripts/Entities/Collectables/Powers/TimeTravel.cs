@@ -14,7 +14,7 @@ public class TimeTravel : Entity, ICollectable
     public void Collect(Entity collector)
     {
         collector.GetComponentInParent<Snake>().Feed(collector, CollectableType);
-        collector.GetComponentInParent<TimeTravelPowerUpController>().OnCollectTimeTravelPowerUp();
+        collector.GetComponentInParent<TimeTravelPowerUpController>().CollectPowerUp();
         OnCollectFood.Raise();
         Destroy(this.gameObject);
     }

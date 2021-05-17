@@ -11,21 +11,38 @@ public class FoodGenerator : MonoBehaviour
     [Header("Food")]
     [SerializeField] private CollectableSettings _collectableSettings;
 
+
+    public int startCollectableCount;
+
+    private void Start()
+    {
+        startCollectableCount = 0;
+    }
+
+    public void IncreaseStartCollectableCount()
+    {
+        startCollectableCount++;
+    }
+
     public void InstantiateNewFood()
     {
         int rNG = UnityEngine.Random.Range(0, 100);
-        if (rNG < 80)
+        if (rNG < 50)
         {
             InstantiateFood(_collectableSettings.FoodPrefab);
         }
-        else if(rNG < 90)
+        else if(rNG < 70)
         {
             InstantiateFood(_collectableSettings.EnginePowerPrefab);
         }
-        else
+        else if(rNG < 80)
         {
             InstantiateFood(_collectableSettings.BatteringRamPrefab);
-        }  
+        }
+        else
+        {
+            InstantiateFood(_collectableSettings.TimeTravelPrefab);
+        }
     }
 
     private void InstantiateFood(GameObject collectable)
@@ -37,7 +54,7 @@ public class FoodGenerator : MonoBehaviour
 
     public void InstantiateFirstFood()
     {
-        for(int i = 0; i < _collectableSettings.StartingCollectableCount; i++)
+        for(int i = 0; i < startCollectableCount; i++)
             InstantiateNewFood();
     }
 

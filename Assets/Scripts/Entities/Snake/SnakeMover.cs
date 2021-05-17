@@ -110,8 +110,8 @@ public class SnakeMover
     private void MoveSnakeHead(int newX, int newY)
     {
 
-        bool dead = CheckNextCellEntities(newX, newY);
-        if(!dead)
+        bool move = CheckNextCellEntities(newX, newY);
+        if(!move)
             _snake.CurrentHead.currentGridCell = _gridManager.GetGridCellByCoordinate(newX, newY);
     }
 
@@ -134,6 +134,12 @@ public class SnakeMover
                 enemySnakeBlock.gameObject.SetActive(false);
            
                 _snake.CurrentHead.GetComponentInParent<BatteringRamPowerUpController>().RemovingBatteringRamPowerUp();
+            }
+            else if(_snake.GetComponent<TimeTravelPowerUpController>().BlockQuantity > 0)
+            {
+                TimeTravelPowerUpController timeTravel = _snake.GetComponent<TimeTravelPowerUpController>();
+                timeTravel.StartTimeTravel();
+                return true;
             }
             else
             {

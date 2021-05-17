@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 9158487608503621272}
   - component: {fileID: 9158487608503621273}
   - component: {fileID: 8979991264384508787}
+  - component: {fileID: 509851420260589586}
+  - component: {fileID: -346519127102575430}
   m_Layer: 0
   m_Name: EnginePower
   m_TagString: Untagged
@@ -96,6 +98,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _typeOfEntity: 3
-  _entityInfo: {fileID: 11400000, guid: d857be398373cec469d78705f1849ee5, type: 2}
+  OnSendReference: {fileID: 11400000, guid: 9084b68d4036dab48a958e16acd5bb46, type: 2}
+  _prefab: {fileID: 9158487608503621276}
   OnCollectEnginePower: {fileID: 11400000, guid: 5c7517cff9d5a504f8041894a2e45613, type: 2}
   OnCollectFood: {fileID: 11400000, guid: cbbcebb942c98e541964205dd4489348, type: 2}
+--- !u!114 &509851420260589586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158487608503621276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c01560c85da759438bbb1d7d31bd90b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 2568cd35bef466b42b054c1c6a2828f8, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8979991264384508787}
+        m_TargetAssemblyTypeName: Entity, Assembly-CSharp
+        m_MethodName: SendReference
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-346519127102575430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9158487608503621276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 0a8a1bf3ba0e7df4a9b76a54b9df73cc, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8979991264384508787}
+        m_TargetAssemblyTypeName: Entity, Assembly-CSharp
+        m_MethodName: DeleteThisEntity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

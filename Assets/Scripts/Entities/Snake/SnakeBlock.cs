@@ -7,7 +7,7 @@ public class SnakeBlock : Entity
 {
     [SerializeField] private bool _isHead;
 
-    [SerializeField] private Sprite headSprite;
+    [SerializeField] public Sprite headSprite;
     [SerializeField] public Sprite tailSprite;
     [SerializeField] public Sprite engineSprite;
     [SerializeField] public Sprite BatteringRamSprite;
@@ -39,7 +39,6 @@ public class SnakeBlock : Entity
                 case CollectableType.BatteringRam:
                     spriteRenderer.sprite = BatteringRamSprite;
                     break;
-
            }
             _blockType = value;
         }
@@ -53,6 +52,7 @@ public class SnakeBlock : Entity
         }
         set
         {
+            
             _isHead = value;
         }
     }

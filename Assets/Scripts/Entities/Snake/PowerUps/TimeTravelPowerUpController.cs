@@ -2,20 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeTravelPowerUpController : MonoBehaviour
+public class TimeTravelPowerUpController : PowerUpController
 {
     [SerializeField] private GridManager _gridManager;
+    [SerializeField] private GameObjectEvent OnGetTimeTravelBlock;
+    [SerializeField] private GameObjectEvent OnSnakeTimeTravel;
 
-    public void OnCollectTimeTravelPowerUp()
+    public override void CollectPowerUp()
     {
+        base.CollectPowerUp();
+        OnGetTimeTravelBlock.Raise(gameObject);
     }
 
-    public void ActivatePowerUp()
+    public override void ClearPowerUp()
     {
+        base.ClearPowerUp();
     }
 
-    private void Update()
+    public void OnTimeTravel()
     {
+        Snake snake = GetComponent<Snake>();
+        snake.ThisSnake.Clear();
+    }
 
+    public void StartTimeTravel()
+    {
+        OnSnakeTimeTravel.Raise(gameObject);
     }
 }

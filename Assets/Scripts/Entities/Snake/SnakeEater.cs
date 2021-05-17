@@ -18,7 +18,10 @@ public class SnakeEater
 
     public bool HasFoodInTheLastPosition()
     {
+        if(_snake.ThisSnake.Count == 0)
+            return false;
         return _snake.ThisSnake.Last().HasFood;
+        
     }
 
     public float GetSnakeCurrentSpeed()

@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 770218888753835590}
   - component: {fileID: 1782761021}
   - component: {fileID: 9189838092653754246}
+  - component: {fileID: 207442488}
+  - component: {fileID: 5848020232133058742}
   m_Layer: 0
   m_Name: FoodGenerator
   m_TagString: Untagged
@@ -47,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridManager: {fileID: 11400000, guid: 9fbad54f33e90b441b2af6f228f9b715, type: 2}
   _collectableSettings: {fileID: 11400000, guid: 9e7f261ea3b40f74aa038b58c7e94efd, type: 2}
+  startCollectableCount: 0
 --- !u!114 &1782761021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 631266a263b0c674cbfc250cba7deec2, type: 2}
+  gameEvent: {fileID: 11400000, guid: 71c1696df77fc29408fca64ceb887f70, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
@@ -88,6 +91,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameEvent: {fileID: 11400000, guid: cbbcebb942c98e541964205dd4489348, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 770218888753835590}
+        m_TargetAssemblyTypeName: FoodGenerator, Assembly-CSharp
+        m_MethodName: InstantiateNewFood
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &207442488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770218888753835591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 7906a459a36632945a6579002fb036c3, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 770218888753835590}
+        m_TargetAssemblyTypeName: FoodGenerator, Assembly-CSharp
+        m_MethodName: IncreaseStartCollectableCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5848020232133058742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770218888753835591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b159b266b3911ac4fa5977132396d39b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 511e235e5cf063c42a9e7cb10a0204c2, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
