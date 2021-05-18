@@ -10,7 +10,8 @@ public class SnakeBlock : Entity
     [SerializeField] public Sprite headSprite;
     [SerializeField] public Sprite tailSprite;
     [SerializeField] public Sprite engineSprite;
-    [SerializeField] public Sprite BatteringRamSprite;
+    [SerializeField] public Sprite batteringRamSprite;
+    [SerializeField] public Sprite timeTravelSprite;
 
 
     [SerializeField] public SpriteRenderer spriteRenderer;
@@ -37,7 +38,10 @@ public class SnakeBlock : Entity
                     spriteRenderer.sprite = engineSprite;
                     break;
                 case CollectableType.BatteringRam:
-                    spriteRenderer.sprite = BatteringRamSprite;
+                    spriteRenderer.sprite = batteringRamSprite;
+                    break;
+                case CollectableType.TimeTravel:
+                    spriteRenderer.sprite = timeTravelSprite;
                     break;
            }
             _blockType = value;

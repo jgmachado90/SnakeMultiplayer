@@ -25,12 +25,26 @@ public class TimeTravelHandeler : MonoBehaviour
     public void OnSnakeGetTimeTravelBlock(GameObject snakeGO)
     {
         Snake snake = snakeGO.GetComponent<Snake>();
+        RemoveOldTimeTravelData(snake);
 
         TimeTravelData newTimeTravelData = new TimeTravelData(timeTravelId, snake);
         snakesTimeTravelData.Add(newTimeTravelData);
 
         OnRequestReferences.Raise(timeTravelId);
         timeTravelId++;
+    }
+
+    private void RemoveOldTimeTravelData(Snake snake)
+    {
+        TimeTravelData thisTimeTravel = null;
+        foreach (TimeTravelData timeTravelData in snakesTimeTravelData)
+        {
+            if (timeTravelData.mainSnake == snake)
+            {
+                thisTimeTravel = timeTravelData;
+            }
+        }
+        snakesTimeTravelData.Remove(thisTimeTravel);
     }
 
     //After request references, every snake or collectable will answer back sending their referencies

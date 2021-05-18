@@ -12,5 +12,5 @@ public enum CollectableType
     Food,
     BatteringRam,
     EnginePower,
-   
+    TimeTravel
 }

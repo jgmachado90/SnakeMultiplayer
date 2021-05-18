@@ -9,7 +9,7 @@ public class TimeTravel : Entity, ICollectable
 
     private void Start()
     {
- 
+        CollectableType = CollectableType.TimeTravel;
     }
     public void Collect(Entity collector)
     {
