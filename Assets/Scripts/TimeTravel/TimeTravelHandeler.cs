@@ -25,6 +25,7 @@ public class TimeTravelHandeler : MonoBehaviour
     public void OnSnakeGetTimeTravelBlock(GameObject snakeGO)
     {
         Snake snake = snakeGO.GetComponent<Snake>();
+
         RemoveOldTimeTravelData(snake);
 
         TimeTravelData newTimeTravelData = new TimeTravelData(timeTravelId, snake);
