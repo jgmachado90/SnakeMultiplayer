@@ -107,12 +107,13 @@ public class Snake : MonoBehaviour
 
     private void ReloadThisSnake()
     {
+        Debug.Log("Reload Snake By Death");
         SnakeInitializer snakeInitializer = GetComponent<SnakeInitializer>(); 
         snakeInitializer.ChangeSnake(snakeInitializer.SnakeStartingBlocks);
 
         _snakeInput.LookingDirection = Direction.Right;
         _snakeInput.MovingDirection = Direction.Right;
-      
+     
     }
 
     public void Feed(Entity collector, CollectableType collectedType)

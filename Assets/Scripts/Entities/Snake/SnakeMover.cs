@@ -19,7 +19,7 @@ public class SnakeMover
 
     public void Tick()
     {
-        if (_snake.CurrentHead.currentGridCell == null) return;
+        if (_snake.CurrentHead != null && _snake.CurrentHead.currentGridCell == null ) return;
         ApplyMovement();
     }
 

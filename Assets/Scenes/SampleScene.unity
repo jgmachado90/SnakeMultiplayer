@@ -123,141 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &940214274
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 940214277}
-  - component: {fileID: 940214276}
-  - component: {fileID: 940214275}
-  - component: {fileID: 940214278}
-  - component: {fileID: 940214279}
-  m_Layer: 0
-  m_Name: TimeTravelHandeler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &940214275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940214274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98dac17f927e4d343a1f49ba260ef3b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 9084b68d4036dab48a958e16acd5bb46, type: 2}
-  unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 940214276}
-        m_TargetAssemblyTypeName: TimeTravelHandeler, Assembly-CSharp
-        m_MethodName: OnGetReference
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &940214276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940214274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64b237201d03ce64d983354c2bc527bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnRequestReferences: {fileID: 11400000, guid: 2568cd35bef466b42b054c1c6a2828f8, type: 2}
-  OnTimeTravel: {fileID: 11400000, guid: 0a8a1bf3ba0e7df4a9b76a54b9df73cc, type: 2}
-  OnTimeTravelComplete: {fileID: 11400000, guid: 511e235e5cf063c42a9e7cb10a0204c2, type: 2}
-  collectableSettings: {fileID: 11400000, guid: 9e7f261ea3b40f74aa038b58c7e94efd, type: 2}
-  snakePrefabsSettings: {fileID: 11400000, guid: 682bf1ff57367b442a9f78a051cb910c, type: 2}
---- !u!4 &940214277
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940214274}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.37906, y: 9.2174225, z: 7.111179}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &940214278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940214274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 838793c3eb4cc844f9cb437909dd5e12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 46f47e47927c68046bc2b6b8d4675432, type: 2}
-  unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 940214276}
-        m_TargetAssemblyTypeName: TimeTravelHandeler, Assembly-CSharp
-        m_MethodName: OnSnakeGetTimeTravelBlock
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &940214279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940214274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 838793c3eb4cc844f9cb437909dd5e12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: c6d9b399b3f768f4bb639d65437c07e6, type: 2}
-  unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 940214276}
-        m_TargetAssemblyTypeName: TimeTravelHandeler, Assembly-CSharp
-        m_MethodName: OnStartTimeTravel
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +320,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6e5d290a07fefd4ba32f47630508c9e, type: 3}
+--- !u!1001 &3776316800154721638
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.37906
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.2174225
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.111179
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507363, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3776316799214507364, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
+      propertyPath: m_Name
+      value: TimeTravelHandeler
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5a5911843f69c1b49a7b1f83d4ba6cb4, type: 3}
 --- !u!1001 &5896730197383313819
 PrefabInstance:
   m_ObjectHideFlags: 0

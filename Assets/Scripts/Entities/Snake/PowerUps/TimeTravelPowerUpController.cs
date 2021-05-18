@@ -8,6 +8,11 @@ public class TimeTravelPowerUpController : PowerUpController
     [SerializeField] private GameObjectEvent OnGetTimeTravelBlock;
     [SerializeField] private GameObjectEvent OnSnakeTimeTravel;
 
+    private void Update()
+    {
+        Debug.Log("Time Travel Block Quantity = " + BlockQuantity);
+    }
+
     public override void CollectPowerUp()
     {
         base.CollectPowerUp();
@@ -21,6 +26,7 @@ public class TimeTravelPowerUpController : PowerUpController
 
     public void OnTimeTravel()
     {
+        SpentPowerUp(1);
         Snake snake = GetComponent<Snake>();
         snake.ThisSnake.Clear();
     }

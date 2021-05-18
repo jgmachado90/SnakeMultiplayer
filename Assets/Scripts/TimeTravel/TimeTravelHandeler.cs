@@ -24,13 +24,11 @@ public class TimeTravelHandeler : MonoBehaviour
     //travel handeler, in order to record the grid state.
     public void OnSnakeGetTimeTravelBlock(GameObject snakeGO)
     {
-        Debug.Log("Getting new snake");
         Snake snake = snakeGO.GetComponent<Snake>();
 
         TimeTravelData newTimeTravelData = new TimeTravelData(timeTravelId, snake);
         snakesTimeTravelData.Add(newTimeTravelData);
 
-        Debug.Log("Requesting References");
         OnRequestReferences.Raise(timeTravelId);
         timeTravelId++;
     }
@@ -38,7 +36,6 @@ public class TimeTravelHandeler : MonoBehaviour
     //After request references, every snake or collectable will answer back sending their referencies
     public void OnGetReference(Tuple<int, GameObject> reference)
     {
-        Debug.Log("Getting new reference");
         int id = reference.Item1;
         GameObject referenceGO = reference.Item2;
 
@@ -77,7 +74,6 @@ public class TimeTravelHandeler : MonoBehaviour
             if (timeTravelData.mainSnake == snake)
             {
                 thisTimeTravel = timeTravelData;
-                Debug.Log("Starting Time Travel");
                 LoadSnakes(timeTravelData);
                 LoadFoods(timeTravelData);
                 OnTimeTravelComplete.Raise();
@@ -99,7 +95,8 @@ public class TimeTravelHandeler : MonoBehaviour
 
     private void LoadSnakes(TimeTravelData timeTravelData)
     {
-        foreach(var snake in timeTravelData.snakes){
+        Debug.Log("Time travel Load Snakes");
+        foreach (var snake in timeTravelData.snakes){
 
             List<SnakeBlock> newThisSnake = new List<SnakeBlock>();
             foreach(SnakeTailData snakeTail in snake.Value)
