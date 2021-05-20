@@ -1,3 +1,3 @@
 # SnakeMultiplayer
 
-![alt text](Architecture.jpg)
+![alt text](Architecture2.jpg)
