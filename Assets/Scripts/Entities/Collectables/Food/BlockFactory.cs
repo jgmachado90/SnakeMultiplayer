@@ -3,16 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoodGenerator : MonoBehaviour
+public class BlockFactory : MonoBehaviour
 {
-    [Header("Grid")]
+    [Header("STATIC DATA")]
+    [SerializeField] private BlockPrefabData _collectableSettings;
+
+    [Header("DYNAMIC DATA")]
     [SerializeField] private GridManager _gridManager;
 
-    [Header("Food")]
-    [SerializeField] private CollectableSettings _collectableSettings;
-
-
-    public int startCollectableCount;
+    private int startCollectableCount;
 
     private void Start()
     {

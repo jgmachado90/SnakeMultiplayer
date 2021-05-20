@@ -2,20 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeTravel : Entity, ICollectable
+public class TimeTravel : CollectableBlocks
 {
-    public VoidEvent OnCollectFood;
-    public CollectableType CollectableType { get; set; }
-
     private void Start()
     {
         CollectableType = CollectableType.TimeTravel;
     }
-    public void Collect(Entity collector)
+    public override void Collect(Entity collector)
     {
-        collector.GetComponentInParent<Snake>().Feed(collector, CollectableType);
+        base.Collect(collector);
         collector.GetComponentInParent<TimeTravelPowerUpController>().CollectPowerUp();
-        OnCollectFood.Raise();
+        OnCollectBlock.Raise();
         Destroy(this.gameObject);
     }
 }

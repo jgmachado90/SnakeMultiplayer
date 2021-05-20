@@ -72,13 +72,13 @@ public class SnakeBlock : Entity
         {
             if (value)
             {
-                float scaleValue = _snakeSettings.SnakeAestheticsSettings.FeededScale.Value;
+                float scaleValue = _snakeSettings.SnakeScaleSettings.FeededScale.Value;
                 transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
                 _hasFood = value;
             }
             else
             {
-                float scaleValue = _snakeSettings.SnakeAestheticsSettings.StartScale.Value;
+                float scaleValue = _snakeSettings.SnakeScaleSettings.StartScale.Value;
                 transform.localScale = new Vector3(scaleValue, scaleValue, scaleValue);
                 _hasFood = value;
             }     

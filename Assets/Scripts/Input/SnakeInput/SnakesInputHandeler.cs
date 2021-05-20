@@ -5,25 +5,30 @@ using System;
 
 public class SnakesInputHandeler : MonoBehaviour
 {
+    [Header("DYNAMIC DATA")]
     [SerializeField] private PlayerInput _currentInput;
     public PlayerInput CurrentInput { get { return _currentInput; } set { _currentInput = value; } }
 
-    public InputHandeler inputHandeler;
-
-    public List<Tuple<KeyCode, KeyCode>> playerInputKeys = new List<Tuple<KeyCode, KeyCode>>();
-
+    [Header("EVENTS")]
     [SerializeField] private VoidEvent OnInstantiateNewSnake;
     [SerializeField] private VoidEvent OnChangeSnakePrefab;
     [SerializeField] private VoidEvent OnAssignInputKeys;
     [SerializeField] private VoidEvent OnPrepareToReceiveNewSnake;
 
+    [Header("REFERENCES")]
+    public InputHandeler inputHandeler;
 
+    [Header("VARIABLES")]
+    public float timePressedToAssignNewPlayer;
 
+    
 
-    float time;
+    private List<Tuple<KeyCode, KeyCode>> playerInputKeys = new List<Tuple<KeyCode, KeyCode>>();
+
+    private float time;
     private float currentTimeToAssignNewPlayer;
     private float firstTimeToAssignNewPlayer;
-    public float timePressedToAssignNewPlayer;
+   
 
     private void Start()
     {
@@ -32,13 +37,13 @@ public class SnakesInputHandeler : MonoBehaviour
     }
     private void Update()
     {
-        if (inputHandeler.activeInputs.Count == 2 && CurrentInput.MyInput == null)
+        if (inputHandeler.ActiveInputs.Count == 2 && CurrentInput.MyInput == null)
         {
             SetCurrentInputKeys();
             StartPressingTimeCount();
         }
 
-        else if (inputHandeler.activeInputs.Count == 2 && CurrentInput.MyInput != null)
+        else if (inputHandeler.ActiveInputs.Count == 2 && CurrentInput.MyInput != null)
         {
             if (Time.time >= currentTimeToAssignNewPlayer)
             {
@@ -51,14 +56,12 @@ public class SnakesInputHandeler : MonoBehaviour
             }
         }
 
-        if (inputHandeler.activeInputs.Count < 2 && CurrentInput.MyInput != null)
+        if (inputHandeler.ActiveInputs.Count < 2 && CurrentInput.MyInput != null)
         {
             if (Time.time >= firstTimeToAssignNewPlayer)
             {
                 OnAssignInputKeys.Raise();
                 OnPrepareToReceiveNewSnake.Raise();
-             // snakeFactory.AssignLastSnakeInputKeys(_currentInputKeys.Item1, _currentInputKeys.Item2);
-             // snakeFactory.PrepareToReceiveNewSnake();
                 CurrentInput.MyInput = null;
             }
             else
@@ -93,8 +96,8 @@ public class SnakesInputHandeler : MonoBehaviour
     {
         if (CurrentInput.MyInput == null)
         {
-            KeyCode firstKey = inputHandeler.activeInputs[0];
-            KeyCode secondKey = inputHandeler.activeInputs[1];
+            KeyCode firstKey = inputHandeler.ActiveInputs[0];
+            KeyCode secondKey = inputHandeler.ActiveInputs[1];
             CurrentInput.MyInput = new Tuple<KeyCode, KeyCode>(firstKey, secondKey);
         }
     }

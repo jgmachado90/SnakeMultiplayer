@@ -5,7 +5,7 @@ using System;
 
 public class Entity : MonoBehaviour
 {
-    public enum TypeOfEntity {Player, Enemy, Wall, Food};
+    public enum TypeOfEntity {Player, Block};
 
     [SerializeField]
     private TypeOfEntity _typeOfEntity;

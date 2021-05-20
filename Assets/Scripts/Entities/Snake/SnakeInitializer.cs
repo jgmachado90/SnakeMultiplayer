@@ -62,7 +62,7 @@ public class SnakeInitializer : MonoBehaviour
 
     private void InstantiateNewSnake(int x, int y, CollectableType block)
     {
-        GameObject tailPrefab = _snakeSettings.SnakePrefabSettings.TailPrefab;
+        GameObject tailPrefab = _snakeSettings.SnakePrefabsData.TailBlockPrefab;
         GameObject newTailGO = Instantiate(tailPrefab, transform);
         SnakeBlock newTail = newTailGO.GetComponent<SnakeBlock>();
         newTail.BlockType = block;

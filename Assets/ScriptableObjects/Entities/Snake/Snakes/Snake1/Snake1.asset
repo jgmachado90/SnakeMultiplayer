@@ -13,10 +13,5 @@ MonoBehaviour:
   m_Name: Snake1
   m_EditorClassIdentifier: 
   _snakeMovementSettings: {fileID: 11400000, guid: 1d0bc318835364c458df6aa371fd97e9, type: 2}
-  _snakeAestheticsSettings: {fileID: 11400000, guid: b1cafe07194b94e408b834fbbef8f3fa, type: 2}
-  _snakeInGameSettings: {fileID: 11400000, guid: 65cdd026258a4cb459e9d8e7c6d1b774, type: 2}
-  _snakePrefabSettings: {fileID: 11400000, guid: 682bf1ff57367b442a9f78a051cb910c, type: 2}
-  _firstBlock: 0
-  _secondBlock: 1
-  _thirdBlock: 2
-  _isPlayer2: 0
+  _snakeScaleSettings: {fileID: 11400000, guid: b1cafe07194b94e408b834fbbef8f3fa, type: 2}
+  _snakePrefabsData: {fileID: 11400000, guid: 682bf1ff57367b442a9f78a051cb910c, type: 2}

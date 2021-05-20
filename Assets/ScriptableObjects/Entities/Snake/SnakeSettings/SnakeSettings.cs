@@ -8,10 +8,10 @@ public class SnakeSettings : ScriptableObject
 {
     [Header("SnakeSettings References")]
     [SerializeField] private SnakeMovementSettings _snakeMovementSettings;
-    [SerializeField] private SnakeScaleSettings _snakeAestheticsSettings;
-    [SerializeField] private SnakePrefabsSettings _snakePrefabSettings;
+    [SerializeField] private SnakeScaleSettings _snakeScaleSettings;
+    [SerializeField] private SnakePrefabsData _snakePrefabsData;
    
     public SnakeMovementSettings SnakeMovementSettings { get { return _snakeMovementSettings; } }
-    public SnakeScaleSettings SnakeAestheticsSettings { get { return _snakeAestheticsSettings; } }
-    public SnakePrefabsSettings SnakePrefabSettings { get { return _snakePrefabSettings; } }
+    public SnakeScaleSettings SnakeScaleSettings { get { return _snakeScaleSettings; } }
+    public SnakePrefabsData SnakePrefabsData { get { return _snakePrefabsData; } }
 }

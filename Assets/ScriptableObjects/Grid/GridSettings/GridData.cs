@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Grid/Settings", fileName = "GridData")]
-public class GridSettings : ScriptableObject
+[CreateAssetMenu(menuName = "Grid/GridData", fileName = "GridData")]
+public class GridData : ScriptableObject
 {
     [SerializeField] private IntVariable _lengthX;
     [SerializeField] private IntVariable _lengthY;

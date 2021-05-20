@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class InputHandeler : MonoBehaviour
 {
-    public List<KeyCode> activeInputs = new List<KeyCode>();
+    private List<KeyCode> _activeInputs = new List<KeyCode>();
+    public List<KeyCode> ActiveInputs { get { return _activeInputs; } }
 
     public void Update()
     {
@@ -21,7 +22,7 @@ public class InputHandeler : MonoBehaviour
     {
         List<KeyCode> releasedInput = new List<KeyCode>();
 
-        foreach (KeyCode code in activeInputs)
+        foreach (KeyCode code in _activeInputs)
         {
             releasedInput.Add(code);
 
@@ -32,7 +33,7 @@ public class InputHandeler : MonoBehaviour
                 //Debug.Log(code + " was released");
             }
         }
-        activeInputs = releasedInput;
+        _activeInputs = releasedInput;
     }
 
 
@@ -42,11 +43,9 @@ public class InputHandeler : MonoBehaviour
         {
             if (Input.GetKey(code))
             {
-                activeInputs.Remove(code);
-                activeInputs.Add(code);
+                _activeInputs.Remove(code);
+                _activeInputs.Add(code);
                 pressedInput.Add(code);
-
-                //Debug.Log(code + " was pressed");
             }
         }
     }

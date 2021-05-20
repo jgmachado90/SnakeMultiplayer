@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Food/Settings", fileName = "FoodData")]
-public class CollectableSettings : ScriptableObject
+[CreateAssetMenu(menuName = "Collectable/BlockPrefabData", fileName = "BlockPrefabData")]
+public class BlockPrefabData : ScriptableObject
 {
     [SerializeField] private GameObject _foodPrefab;
     [SerializeField] private GameObject _enginePowerPrefab;

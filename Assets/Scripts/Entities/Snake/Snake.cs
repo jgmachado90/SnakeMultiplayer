@@ -7,15 +7,20 @@ using UnityEngine.SceneManagement;
 
 public class Snake : MonoBehaviour
 {
-    [Header("SnakeInstanceVariables")]
-   
+    [Header("STATIC DATA")]
+    [SerializeField] private SnakeSettings _snakeSettings;
+    public SnakeSettings SnakeSettings { set { _snakeSettings = value; } }
+    [SerializeField] private GridManager _gridManager;
+
+    [Header("VARIABLES")]
+    public bool dead = false;
+    [SerializeField] private bool _canMove;
     [SerializeField] private SnakeBlock _currentHead;
     [SerializeField] private List<SnakeBlock> _thisSnake;
-    [SerializeField] private bool _canMove;
+
     private int _startingX;
     private int _startingY;
     private Color _snakeColor;
-
     public SnakeBlock CurrentHead { get { return _currentHead; } set { _currentHead = value; } }
     public List<SnakeBlock> ThisSnake { get { return _thisSnake; } set { _thisSnake = value; } }
     public bool CanMove { get { return _canMove; } set { _canMove = value; } }
@@ -23,21 +28,9 @@ public class Snake : MonoBehaviour
     public int StartingY { get { return _startingY; } set { _startingY = value; } }
     public Color SnakeColor { get { return _snakeColor; } set { _snakeColor = value; } }
 
-    [Header("Snake")]
-    [SerializeField] private SnakeSettings _snakeSettings;
-    public SnakeSettings SnakeSettings { set { _snakeSettings = value; } }
-
-    [Header("Grid")]
-    [SerializeField] private GridManager _gridManager;
-
-
     private ISnakeInput _snakeInput;
     private SnakeMover _snakeMover;
     private SnakeEater _snakeEater;
-
-    
-    public bool dead = false;
-
 
     private void Awake()
     {
@@ -125,7 +118,7 @@ public class Snake : MonoBehaviour
 
     public void Grow(GridCell newBlockPosition)
     {
-        GameObject tailPrefab = _snakeSettings.SnakePrefabSettings.TailPrefab;
+        GameObject tailPrefab = _snakeSettings.SnakePrefabsData.TailBlockPrefab;
         GameObject newTailGO = Instantiate(tailPrefab, transform);
 
         SnakeBlock newTail = newTailGO.GetComponent<SnakeBlock>();

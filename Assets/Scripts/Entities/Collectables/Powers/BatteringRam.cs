@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BatteringRam : Entity, ICollectable
+public class BatteringRam : CollectableBlocks
 {
-    public VoidEvent OnCollectFood;
-
-    public CollectableType CollectableType { get; set; }
-
     private void Start()
     {
         CollectableType = CollectableType.BatteringRam;
     }
-    public void Collect(Entity collector)
+    public override void Collect(Entity collector)
     {
-        collector.GetComponentInParent<Snake>().Feed(collector, CollectableType);
+        base.Collect(collector);
         collector.GetComponentInParent<BatteringRamPowerUpController>().CollectPowerUp();
-        OnCollectFood.Raise();
+        OnCollectBlock.Raise();
         Destroy(this.gameObject);
     }
 }

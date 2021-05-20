@@ -100,7 +100,7 @@ MonoBehaviour:
   _typeOfEntity: 3
   OnSendReference: {fileID: 11400000, guid: 9084b68d4036dab48a958e16acd5bb46, type: 2}
   _prefab: {fileID: 9158487608503621276}
-  OnCollectFood: {fileID: 11400000, guid: cbbcebb942c98e541964205dd4489348, type: 2}
+  OnCollectBlock: {fileID: 11400000, guid: cbbcebb942c98e541964205dd4489348, type: 2}
 --- !u!114 &-8889917041534662308
 MonoBehaviour:
   m_ObjectHideFlags: 0

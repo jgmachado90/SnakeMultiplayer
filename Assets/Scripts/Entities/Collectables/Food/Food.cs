@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food : Entity, ICollectable
+public class Food : CollectableBlocks
 {
-    public CollectableType CollectableType { get; set; }
-    public VoidEvent OnCollectFood;
-
     private void Start()
     {
         CollectableType = CollectableType.Food;
     }
-    public void Collect(Entity collector)
+    public override void Collect(Entity collector)
     {
-        collector.GetComponentInParent<Snake>().Feed(collector, CollectableType);
-        OnCollectFood.Raise();
+        base.Collect(collector);
+        OnCollectBlock.Raise();
         Destroy(this.gameObject);
     }
 }

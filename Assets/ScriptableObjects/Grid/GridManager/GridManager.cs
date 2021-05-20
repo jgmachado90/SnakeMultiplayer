@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Grid/Manager", fileName = "GridManager")]
 public class GridManager : ScriptableObject
 {
-    [SerializeField] public GridSettings _gridSettings;
+    [SerializeField] public GridData _gridSettings;
 
     public List<GridCell> _gridCells = new List<GridCell>();
     public List<GridCell> _emptyCells = new List<GridCell>();
@@ -97,7 +97,7 @@ public class GridManager : ScriptableObject
         {
             if (gridCell.ocupated)
             {
-                entities.Add(gridCell.entityOcupating);
+                entities.Add(gridCell.EntityOcupating);
             }
         }
         return entities;

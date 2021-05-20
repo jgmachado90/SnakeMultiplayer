@@ -8,19 +8,21 @@ public class GridCell : MonoBehaviour
 
     public GridCellCoordinates coordinate;// = new GridCellCoordinates();
     public bool ocupated;
-    public Entity entityOcupating;
+
+    private Entity _entityOcupating;
+    public Entity EntityOcupating { get { return _entityOcupating; } set { _entityOcupating = value;}  }
  
 
     [SerializeField] private GridManager _gridManager;
 
     public void SetEntityInThisCell(Entity entity)
     {
-        if(entity.currentGridCell != null && entity.currentGridCell.entityOcupating == entity) {
+        if(entity.currentGridCell != null && entity.currentGridCell._entityOcupating == entity) {
             entity.currentGridCell.RemoveEntityFromThisCell();
         }
         
         ocupated = true;
-        entityOcupating = entity;
+        _entityOcupating = entity;
         entity.transform.position = new Vector3(coordinate.x, coordinate.y, 0);
         _gridManager.RemoveCellFromEmptyList(this);
      
@@ -29,7 +31,7 @@ public class GridCell : MonoBehaviour
     public void RemoveEntityFromThisCell()
     {
         ocupated = false;
-        entityOcupating = null;
+        _entityOcupating = null;
         _gridManager.AddCellInEmptyList(this);
     }
 

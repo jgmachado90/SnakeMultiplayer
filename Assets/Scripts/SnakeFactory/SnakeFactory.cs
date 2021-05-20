@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class SnakeFactory : MonoBehaviour
 {
-    [SerializeField] private VoidEvent OnInitializeFirstSnake;
 
-    [SerializeField] SnakePrefabsSettings snakesPrefabs;
+    [Header("STATIC DATA")]
+    [SerializeField] SnakePrefabsData snakesPrefabs;
     [SerializeField] List<SnakeStartingBlocks> snakeStartingBlocks;
 
+    [Header("DYNAMIC DATA")]
     [SerializeField] private PlayerInput _currentInput;
     public PlayerInput CurrentInput { get { return _currentInput; } }
 
-    SnakeInitializer lastSnakeCreated;
-    private int currentSnakeStartingBlocksIndex;
+    [Header("EVENTS")]
+    [SerializeField] private VoidEvent OnInitializeFirstSnake;
 
-    
+    private SnakeInitializer lastSnakeCreated;
+    private int currentSnakeStartingBlocksIndex;
 
     private void Awake()
     {

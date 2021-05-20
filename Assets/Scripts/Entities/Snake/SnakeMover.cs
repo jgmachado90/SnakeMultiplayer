@@ -119,18 +119,18 @@ public class SnakeMover
     {
         GridCell nextCell = _gridManager.GetGridCellByCoordinate(x, y);
         if(nextCell == null)return false;
-        if (nextCell.entityOcupating == null) return false;
+        if (nextCell.EntityOcupating == null) return false;
 
-        if (nextCell.entityOcupating is ICollectable)
+        if (nextCell.EntityOcupating is ICollectable)
         {
-            nextCell.entityOcupating.GetComponent<ICollectable>().Collect(_snake.CurrentHead);
+            nextCell.EntityOcupating.GetComponent<ICollectable>().Collect(_snake.CurrentHead);
         }
 
-        else if (nextCell.entityOcupating.typeOfEntity == Entity.TypeOfEntity.Player)
+        else if (nextCell.EntityOcupating.typeOfEntity == Entity.TypeOfEntity.Player)
         {
             if (_snake.GetComponent<BatteringRamPowerUpController>().BlockQuantity > 0)
             {
-                SnakeBlock enemySnakeBlock = nextCell.entityOcupating.GetComponent<SnakeBlock>();
+                SnakeBlock enemySnakeBlock = nextCell.EntityOcupating.GetComponent<SnakeBlock>();
                 enemySnakeBlock.gameObject.SetActive(false);
            
                 _snake.CurrentHead.GetComponentInParent<BatteringRamPowerUpController>().RemovingBatteringRamPowerUp();

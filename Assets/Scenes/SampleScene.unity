@@ -259,7 +259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 770218888753835591, guid: 37a1991587f51b342a960710cbaabfd8, type: 3}
       propertyPath: m_Name
-      value: FoodGenerator
+      value: BlockFactory
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37a1991587f51b342a960710cbaabfd8, type: 3}
@@ -434,7 +434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5896730198128607059, guid: 21714f63032b04740ae2850ac3053bda, type: 3}
       propertyPath: m_Name
-      value: Grid
+      value: GridFactory
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 151709923, guid: 21714f63032b04740ae2850ac3053bda, type: 3}
@@ -448,7 +448,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6651430421901421688, guid: bf92919ec4d076c4aa716a6daaa61fbd, type: 3}
       propertyPath: m_Name
-      value: InputHandeler
+      value: Input
       objectReference: {fileID: 0}
     - target: {fileID: 6651430421901421689, guid: bf92919ec4d076c4aa716a6daaa61fbd, type: 3}
       propertyPath: m_RootOrder

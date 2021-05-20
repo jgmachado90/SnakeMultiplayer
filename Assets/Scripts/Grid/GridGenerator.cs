@@ -2,11 +2,13 @@
 
 public class GridGenerator : MonoBehaviour
 {
-    [Header("Grid")]
-    [SerializeField] private GridSettings _gridSettings;
+    [Header("STATIC DATA")]
+    [SerializeField] private GridData _gridSettings;
+
+    [Header("DYNAMIC DATA")]
     [SerializeField] private GridManager _gridManager;
 
-    [Header("Events")]
+    [Header("EVENTS")]
     public VoidEvent OnCreateGrid;
 
     private void Start()

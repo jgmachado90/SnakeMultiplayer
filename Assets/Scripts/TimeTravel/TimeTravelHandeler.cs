@@ -5,15 +5,17 @@ using UnityEngine;
 
 public class TimeTravelHandeler : MonoBehaviour
 {
-    List<TimeTravelData> snakesTimeTravelData = new List<TimeTravelData>();
+    [Header("STATIC DATA")]
+    [SerializeField] private SnakePrefabsData snakePrefabsSettings;
+    [SerializeField] private BlockPrefabData collectableSettings;
 
-    int timeTravelId;
+    [Header("EVENTS")]
     [SerializeField] private IntEvent OnRequestReferences;
     [SerializeField] private VoidEvent OnTimeTravel;
     [SerializeField] private VoidEvent OnTimeTravelComplete;
 
-    [SerializeField] private CollectableSettings collectableSettings;
-    [SerializeField] private SnakePrefabsSettings snakePrefabsSettings;
+    private int timeTravelId;
+    private List<TimeTravelData> snakesTimeTravelData = new List<TimeTravelData>();
 
     private void Start()
     {
@@ -116,7 +118,7 @@ public class TimeTravelHandeler : MonoBehaviour
             List<SnakeBlock> newThisSnake = new List<SnakeBlock>();
             foreach(SnakeTailData snakeTail in snake.Value)
             {
-                GameObject newSnakeTailGO = Instantiate(snakePrefabsSettings.TailPrefab, snakeTail.parent);
+                GameObject newSnakeTailGO = Instantiate(snakePrefabsSettings.TailBlockPrefab, snakeTail.parent);
                 SnakeBlock newSnakeTail = newSnakeTailGO.GetComponent<SnakeBlock>();
 
                 newSnakeTail.currentGridCell = snakeTail.entityCell;
